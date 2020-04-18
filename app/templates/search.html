@@ -1,7 +1,11 @@
 <html>
     <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
         <link rel="stylesheet" href="/static/bootstrap.min.css">
+        <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
         <link rel="stylesheet" href="/static/main.css">
+
     </head>
     <body>
         <div class="topcorner">
@@ -30,10 +34,31 @@
             <h1>{{output_message}}</h1>
             {% for d in data %}  
                 <br>
-                <p>{{d}}</p>
+                            
+                <div class="row">
+                    <div class = "container my-auto">
+                    <div class="col s12">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                        <span class="card-title">{{d.speaker}}</span>
+                        <p>{{d.speech_text}}</p>
+                        </div>
+                        <div class="card-action">
+                        <a href="#">Read More</a>
+                        <!-- <a href="#">This is a link</a> -->
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+
+            <br>
             {% endfor %}
         {% endif %}
         </form>
     </body>
 
 </html>
+
+
+
