@@ -23,7 +23,7 @@ cymem==2.0.3
 decorator==4.2.1
 Django==1.9.8
 docutils==0.15.2
-https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.1.0/en_core_web_sm-2.1.0.tar.gz#egg=en_core_web_smentrypoints==0.2.3
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.5/en_core_web_sm-2.2.5.tar.gz#egg=en_core_web_smentrypoints==0.2.3
 Flask==1.1.1
 Flask-Bcrypt==0.7.1
 Flask-HTTPAuth==3.3.0
