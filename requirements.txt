@@ -77,7 +77,6 @@ psycopg2==2.7.7
 ptyprocess==0.5.2
 pycairo==1.18.2
 pycparser==2.19
-pyenchant==1.6.7
 pygame==1.9.4
 Pygments==2.2.0
 PyJWT==1.4.0
