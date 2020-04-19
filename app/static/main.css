@@ -1,39 +1,112 @@
 @media (min-width: 1200px) {
-.container {
-    max-width: 970px;
-}
-}
-@media (min-width:400px){
-.global-search {
-padding: 20px 0;
-text-align:center;
-}
-body {
-padding-top: 15%;
-padding-bottom: 15px;
-}
-.global-search {
-text-align:center;
-padding:10px;
-}
-.global-search .form-control {
-width:500px;
-}
-.global-search * {
-display:inline-block;
-margin-bottom:0;
-}
-}
-.topcorner{
-position:absolute;
-top:2%;
-right:2%;
-}
-/* .btn{
-background-color: #4285F4;
-border: none
-} */
-.step-links a{
-color: #4285F4;
-}
+    .container {
+        max-width: 970px;
+    }
+    }
+    @media (min-width:400px){
+    .global-search {
+    padding: 20px 0;
+    text-align:center;
+    }
+    body {
+    padding-top: 2%;
+    padding-bottom: 15px;
+    background-color: rgb(34,42,53);
+    }
 
+    .global-search {
+    text-align:center;
+    padding:10px;
+    }
+    .global-search .form-control {
+    width:500px;
+    }
+    .global-search * {
+    display:inline-block;
+    margin-bottom:0;
+    }
+    }
+    .topcorner{
+    padding-left: 50px;
+    position: static;
+    background-color: rgb(34,42,53);
+    }
+
+    .topcorner p {
+        font-size: 16px;
+        font-family: 'Roboto';
+        font-weight: bold;
+        color: white;
+    }
+
+    #logo {
+        margin:auto;
+        background-color: rgb(34,42,53);
+        text-align: center;
+    }
+
+    #logo img {
+        margin: auto;
+        text-align: center;
+    }
+
+    #input {
+        background-color: rgb(34, 42, 53);
+        font-family: 'roboto';
+        color: white;
+        border: 3px solid white;
+        border-radius: 3px;
+        padding: 3px;
+        width: 300px;
+        height: 20px;
+        margin: 5px;
+        box-shadow: 3px 3px 0px 1px grey;
+    }
+
+    .btn {
+        color: rgb(34, 42, 53);
+        font-family: 'roboto';
+        font-size: 18px;
+        font-weight: bold;
+        background-color: white;
+        border: 3px solid white;
+        height: 32px;
+        width: 50px;
+        margin-left: 15px;
+        padding: 3px;
+        box-shadow: 3px 3px 0px 1px grey;
+        transition: 1s;
+    }
+
+    .btn:hover {
+        color: rgb(34, 42, 53);
+        font-family: 'roboto';
+        font-size: 18px;
+        font-weight: bold;
+        background-color: white;
+        border: 2px solid grey;
+        height: 32px;
+        width: 50px;
+        margin-left: 15px;
+        padding: 0px;
+    }
+    .btn:active {
+        color: rgb(34, 42, 53);
+        font-family: 'roboto';
+        font-size: 18px;
+        font-weight: bold;
+        background-color: white;
+        border: 2px solid grey;
+        height: 32px;
+        width: 50px;
+        margin-left: 15px;
+        padding: 0px;
+    }
+
+    /* .btn{
+    background-color: #4285F4;
+    border: none
+    } */
+    .step-links a{
+    color: #4285F4;
+    }
