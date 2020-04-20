@@ -7,16 +7,15 @@ import os
 import requests
 # if "pip3 install dotenv" doesn't work try "pip3 install python-dotenv"
 from dotenv import load_dotenv
-
+load_dotenv()
 '''
 This sample makes a call to the Bing Image Search API with a text query and returns relevant images with data.
 Documentation: https: // docs.microsoft.com/en-us/azure/cognitive-services/bing-web-search/
 '''
 def image_search(query):
-    load_dotenv()
     # Add your Bing Search V7 subscription key and endpoint to your environment variables.
     subscriptionKey = os.environ["BING_SEARCH_V7_SUBSCRIPTION_KEY"]
-    endpoint = os.environ["BING_SEARCH_V7_ENDPOINT"] + "/bing/v7.0/images/search"
+    endpoint = os.environ["BING_SEARCH_V7_ENDPOINT"] + "/images/search"
 
     # Query to search for
     # query = input("input query term: ")

@@ -7,7 +7,9 @@ import os
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import SocketIO
+from dotenv import load_dotenv
 
+load_dotenv()
 # Configure app
 socketio = SocketIO()
 app = Flask(__name__)

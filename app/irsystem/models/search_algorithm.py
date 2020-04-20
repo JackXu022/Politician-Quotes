@@ -37,7 +37,8 @@ def get_top_n_related(topic, n, politicians={}):
     if topic:        
         new_dict=defaultdict(dict)
         # Base form of the topic, with no inflectional suffixes.
-        topics = set(only_nouns(topic))
+        input_topic = topic.lower()
+        topics = set(only_nouns(input_topic))
         for index, row in related_data.iterrows():
             word_dict = dict(Counter(str(row['speech_nouns']).split(" ")))
             topic_intersect = topics.intersection(word_dict.keys())
