@@ -10,13 +10,14 @@ net_id = "Arzu Mammadova: am2692, Aleah Markovic: adm265, Matthew Price: mp836, 
 
 @irsystem.route('/', methods=['GET'])
 def search():
-	query = request.args.get('search')
-	if not query:
+	topic = request.args.get('topic')
+	politicians = request.args.get('politicians')
+	if not topic and not politicians:
 		data = []
 		output_message = ''
 	else:
-		output_message = "Your search: " + query
-		data = get_top_n_related(query)
+		output_message = "Your search: " + topic + politicians
+		data = get_top_n_related(topic, 10, politicians)
 		# print(data)
 	return render_template('search.html', name=project_name, netid=net_id, output_message=output_message, data=data)
 

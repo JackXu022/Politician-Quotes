@@ -19,7 +19,8 @@
             <br><br>
             
             <div class="form-group">
-                <input id="input" type="text" name="search" class="form-control" placeholder="Your Input">
+                <input id="input" type="text" name="topic" class="form-control" placeholder="Input Topic">
+                <input id="input" type="text" name="politicians" class="form-control" placeholder="Input Politicians">
             </div>
             <button type="submit" class="btn"> <img src="/static/search.png" width="20" height="20" alt="Go"></img> </button>
         </form>
@@ -40,7 +41,7 @@
                         <p>{{d.speech}}</p>
                         </div>
                         <div class="card-action">
-                        <a href="" + {{d.link}}>Read More</a>
+                        <a href = {{d.link}}>Read More</a>
                         </div>
                     </div>
                     </div>
