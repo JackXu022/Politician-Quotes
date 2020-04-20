@@ -76,9 +76,23 @@
         padding: 3px;
         box-shadow: 3px 3px 0px 1px grey;
         transition: 1s;
+        transition-delay: 0s;
+
     }
 
     .btn:hover {
+        color: rgb(34, 42, 53);
+        font-family: 'roboto';
+        font-size: 18px;
+        font-weight: bold;
+        background-color: grey;
+        border: 2px solid white;
+        height: 32px;
+        width: 50px;
+        margin-left: 15px;
+        padding: 0px;
+    }
+    .btn:active {
         color: rgb(34, 42, 53);
         font-family: 'roboto';
         font-size: 18px;
@@ -90,7 +104,44 @@
         margin-left: 15px;
         padding: 0px;
     }
-    .btn:active {
+    .btn:visited {
+        color: rgb(34, 42, 53);
+        font-family: 'roboto';
+        font-size: 18px;
+        font-weight: bold;
+        background-color: white;
+        border: 2px solid grey;
+        height: 32px;
+        width: 50px;
+        margin-left: 15px;
+        padding: 0px;
+    }
+    .btn:focus {
+        color: rgb(34, 42, 53);
+        font-family: 'roboto';
+        font-size: 18px;
+        font-weight: bold;
+        background-color: white;
+        border: 2px solid grey;
+        height: 32px;
+        width: 50px;
+        margin-left: 15px;
+        padding: 0px;
+    }
+
+    .btn:visited {
+        color: rgb(34, 42, 53);
+        font-family: 'roboto';
+        font-size: 18px;
+        font-weight: bold;
+        background-color: white;
+        border: 2px solid grey;
+        height: 32px;
+        width: 50px;
+        margin-left: 15px;
+        padding: 0px;
+    }
+    .btn:focus {
         color: rgb(34, 42, 53);
         font-family: 'roboto';
         font-size: 18px;
