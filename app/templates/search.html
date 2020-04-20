@@ -33,17 +33,17 @@
                 
                 <div class = "container my-auto">
                 <div class="col s12">
-                    <h2 style = "color: white" class="header">{{d.speaker}}</h2>
+                    <h2 style = "color: white; font-family: rockwell; font-weight:bold" class="header">{{d.speaker}}</h2>
                     <div class="card horizontal">
-                      <div class="card-image">
-                        <img style = "width: 400px; height: 100%; border-radius: 50%;" src={{d.image}}>
-                      </div>
+                            <div class="card-image">
+                                <div class="profile"><img style = " border-radius: 50%;" src={{d.image}}></div>
+                            </div>
                       <div class="card-stacked">
                         <div class="card-content">
                           <p>{{d.speech}}</p>
                         </div>
                         <div class="card-action">
-                          <a href={{d.link}}>Read More</a>
+                          <a href={{d.link}}><h3>Read More</h3></a>
                         </div>
                       </div>
                     </div>

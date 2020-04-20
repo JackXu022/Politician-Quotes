@@ -61,7 +61,15 @@
         height: 20px;
         margin: 5px;
         box-shadow: 3px 3px 0px 1px grey;
+        transition: .4s 0s;
     }
+
+    #input:hover {
+        border: 3px solid rgb(165, 0, 33);
+        box-shadow: 3px 3px 0px 1px rgb(0, 102, 153);
+    }
+
+    
 
     .btn {
         color: rgb(34, 42, 53);
@@ -75,7 +83,7 @@
         margin-left: 15px;
         padding: 3px;
         box-shadow: 3px 3px 0px 1px grey;
-        transition: 1s;
+        transition: .5s;
         transition-delay: 0s;
 
     }
@@ -151,7 +159,6 @@
     }
     .card-action{
         margin: 5px;
-        background-color: yellow;
     }
     .card-action a {
         text-align: center;
@@ -184,30 +191,47 @@
         padding: 0px;
     }
 
-    .btn:visited {
-        color: rgb(34, 42, 53);
-        font-family: 'roboto';
-        font-size: 18px;
-        font-weight: bold;
-        background-color: white;
-        border: 2px solid grey;
-        height: 32px;
-        width: 50px;
-        margin-left: 15px;
-        padding: 0px;
+    .card.horizontal {
+        border: 7px solid white;
+        box-shadow: 16px 16px 3px  black;
+        min-height: 300px;
+        background-color:lightgrey;
+        transition: .6s 0s;
     }
-    .btn:focus {
-        color: rgb(34, 42, 53);
-        font-family: 'roboto';
-        font-size: 18px;
-        font-weight: bold;
+
+    .card.horizontal:hover {
+        border: 7px solid rgb(165, 0, 33);
+        box-shadow: 16px 16px 3px  black;
+        min-height: 300px;
         background-color: white;
-        border: 2px solid grey;
-        height: 32px;
-        width: 50px;
-        margin-left: 15px;
-        padding: 0px;
     }
+
+    .card.horizontal:hover .card-image .profile img {
+        border: 8px solid rgb(0, 102, 153);
+    }
+
+
+    .card-image {
+       width:400px;
+    }
+
+    .card-image .profile {
+        margin-left:15px;
+        position:relative;
+        top:50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .card-image .profile img {
+        border: 8px solid white;
+        box-shadow: 5px 5px 3px black;
+        transition: .6s 0s;
+    }
+
+    .card-content {
+    }
+
 
     /* .btn{
     background-color: #4285F4;
