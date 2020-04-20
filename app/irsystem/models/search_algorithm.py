@@ -6,6 +6,8 @@ import pandas as pd
 import spacy
 import pandas as pd
 from collections import Counter
+from app.irsystem.models.BingImageSearchv7 import image_search
+
 
 nlp = spacy.load("en_core_web_sm", disable=['parser', 'ner'])
 
@@ -18,7 +20,11 @@ def only_nouns(texts):
             output.append(token.lemma_)
     return output
 
-def get_top_n_related(topic=None, n=10, politicians={}):
+def get_top_n_related(topic, n, politicians={}):
+    if n:
+        n=int(n)
+    else:
+        n=5
     debate_data = pd.read_csv('app/data/debate_transcripts_v5.csv')
     final_data = []
     if not politicians and not topic:
@@ -26,6 +32,7 @@ def get_top_n_related(topic=None, n=10, politicians={}):
     if not politicians:
         related_data = debate_data       
     else:
+        politicians = set([p.strip() for p in politicians.split(",")])
         related_data = debate_data.loc[debate_data.speaker.isin(politicians)]
     if topic:        
         new_dict=defaultdict(dict)
@@ -42,7 +49,7 @@ def get_top_n_related(topic=None, n=10, politicians={}):
             i=0
             for k, v in od: 
                 trans_info = debate_data.loc[k]
-                obj = {"score": v, "debate_date": trans_info['debate_date'], "speaker":trans_info['speaker'], "speech":trans_info['speech'], "link": trans_info["transcript_link"]}
+                obj = {"score": v, "debate_date": trans_info['debate_date'], "speaker":trans_info['speaker'], "speech":trans_info['speech'], "link": trans_info["transcript_link"], "image":image_search(trans_info['speaker'])}
                 final_data.append(obj)
                 i+=1
                 if i==n:
@@ -52,7 +59,7 @@ def get_top_n_related(topic=None, n=10, politicians={}):
         i=0
         # print("No topic !!!")
         for index, row in related_data.iterrows():
-            obj = {"score": index, "debate_date": row['debate_date'], "speaker":row['speaker'], "speech":row['speech'], "link": row["transcript_link"]}
+            obj = {"score": index, "debate_date": row['debate_date'], "speaker":row['speaker'], "speech":row['speech'], "link": row["transcript_link"], "image":image_search(trans_info['speaker'])}
             final_data.append(obj)
             i+=1
             if i==n:
