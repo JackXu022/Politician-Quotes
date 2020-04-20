@@ -3,7 +3,7 @@ from app.irsystem.models.helpers import *
 from app.irsystem.models.helpers import NumpyEncoder as NumpyEncoder
 
 
-# from app.irsystem.models.booleansearch import get_top_n_related
+from app.irsystem.models.search_algorithm import get_top_n_related
 
 project_name = "Politician Quotes"
 net_id = "Arzu Mammadova: am2692, Aleah Markovic: adm265, Matthew Price: mp836, Zhaopeng Xu: zx273"
