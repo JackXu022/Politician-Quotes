@@ -32,8 +32,16 @@ def get_top_n_related(topic, n, politicians={}):
     if not politicians:
         related_data = debate_data       
     else:
-        politicians = set([p.strip() for p in politicians.split(",")])
-        related_data = debate_data.loc[debate_data.speaker.isin(politicians)]
+        politicians = [p.strip() for p in politicians.split(",")]
+        input_politicians = []
+        for politician in politicians:
+            item = politician.split()
+            word=""
+            for name in item:
+                word += name.capitalize() + " "
+            input_politicians.append(word.strip())
+        input_politicians = set(input_politicians)
+        related_data = debate_data.loc[debate_data.speaker.isin(input_politicians)]
     if topic:        
         new_dict=defaultdict(dict)
         # Base form of the topic, with no inflectional suffixes.
