@@ -23,6 +23,7 @@ cymem==2.0.3
 decorator==4.2.1
 Django==1.9.8
 docutils==0.15.2
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.5/en_core_web_sm-2.2.5.tar.gz
 entrypoints==0.2.3
 Flask==1.1.1
 Flask-Bcrypt==0.7.1
@@ -61,6 +62,7 @@ Mako==1.1.1
 MarkupSafe==1.1.1
 marshmallow==3.5.0
 marshmallow-sqlalchemy==0.22.2
+matplotlib==3.1.2
 mistune==0.8.3
 murmurhash==1.0.2
 mysql-connector==2.2.9
@@ -71,6 +73,7 @@ nmslib==2.0.6
 notebook==5.3.1
 numpy==1.18.1
 packaging==20.1
+pandas==1.0.3
 pandocfilters==1.4.2
 parso==0.1.1
 pexpect==4.3.1
@@ -108,6 +111,7 @@ Send2Trash==1.4.2
 simplegeneric==0.8.1
 singledispatch==3.4.0.3
 six==1.14.0
+spacy==2.2.4
 SQLAlchemy==1.3.13
 srsly==1.0.2
 terminado==0.8.1
