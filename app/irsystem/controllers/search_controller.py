@@ -16,7 +16,7 @@ def search():
 		data = []
 		output_message = ''
 	else:
-		output_message = "Your search: " + topic + politicians
+		output_message = "Topics: " + topic + '\n' + "Politicians: " + politicians
 		data = get_top_n_related(topic, 10, politicians)
 		# print(data)
 	return render_template('search.html', name=project_name, netid=net_id, output_message=output_message, data=data)

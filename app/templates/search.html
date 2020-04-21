@@ -30,16 +30,18 @@
             <h1>{{output_message}}</h1>
             {% for d in data %}  
                 <br>      
-                
                 <div class = "container my-auto">
                 <div class="col s12">
                     <h2 style = "color: white; font-family: rockwell; font-weight:bold" class="header">{{d.speaker}}</h2>
                     <div class="card horizontal">
                             <div class="card-image">
-                                <div class="profile"><img style = " border-radius: 50%;" src={{d.image}}></div>
+                                <div class="profile"><img style = "border-radius: 50%;" src={{d.image}}></div>
                             </div>
                       <div class="card-stacked">
                         <div class="card-content">
+                            <h3> {{d.debate_name}}</h3>
+                            <h3>{{d.debate_date}}</h3>
+                            <br><br>
                           <p>{{d.speech}}</p>
                         </div>
                         <div class="card-action">
@@ -71,6 +73,8 @@
 
             <br>
             {% endfor %}
+            {% else %}
+            <h1>No results found</h1>
         {% endif %}
         </form>
     </body>

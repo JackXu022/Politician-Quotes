@@ -24,7 +24,7 @@ def get_top_n_related(topic, n, politicians={}):
     if n:
         n=int(n)
     else:
-        n=5
+        n=10
     debate_data = pd.read_csv('app/data/debate_transcripts_v5.csv')
     final_data = []
     if not politicians and not topic:
@@ -58,7 +58,10 @@ def get_top_n_related(topic, n, politicians={}):
             i=0
             for k, v in od: 
                 trans_info = debate_data.loc[k]
-                obj = {"score": v, "debate_date": trans_info['debate_date'], "speaker":trans_info['speaker'], "speech":trans_info['speech'], "link": trans_info["transcript_link"], "image":image_search(trans_info['speaker'])}
+                debate_name = trans_info['debate_name']
+                if 'Transcript:' in debate_name: 
+                    debate_name.replace('Transcript:', '')
+                obj = {"score": v, "debate_name": debate_name, "debate_date": trans_info['debate_date'], "speaker":trans_info['speaker'], "speech":trans_info['speech'], "link": trans_info["transcript_link"], "image":image_search(trans_info['speaker'])}
                 final_data.append(obj)
                 i+=1
                 if i==n:
@@ -68,7 +71,10 @@ def get_top_n_related(topic, n, politicians={}):
         i=0
         # print("No topic !!!")
         for index, row in related_data.iterrows():
-            obj = {"score": index, "debate_date": row['debate_date'], "speaker":row['speaker'], "speech":row['speech'], "link": row["transcript_link"], "image":image_search(trans_info['speaker'])}
+            debate_name = row['debate_name']
+            if 'Transcript:' in debate_name: 
+                debate_name.replace('Transcript:', '')
+            obj = {"score": index, "debate_name": debate_name, "debate_date": row['debate_date'], "speaker":row['speaker'], "speech":row['speech'], "link": row["transcript_link"], "image":image_search(trans_info['speaker'])}
             final_data.append(obj)
             i+=1
             if i==n:
