@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <title>Politician Quotes</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,400i,900&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="/static/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/main.css">
+
+    </head>
+    <body>
+        <div class="topcorner">
+            <p>Arzu Mammadova: am2692, Aleah Markovic: adm265 <br> Matthew Prince: mp836, Zhaopeng Xu: zx273</p>
+        </div>
+        <div id = "logo">
+            <img src="/static/Politician Quotes.png" width="1054" height="608"> </img>
+        </div>
+        <form class="form-inline global-search">
+            
+            
+            <br><br>
+            
+            <div class="form-group">
+                <input id="input" type="text" name="topic" class="form-control" placeholder="Input Topic">
+                <input id="input" type="text" name="politicians" class="form-control" placeholder="Input Politicians">
+            </div>
+            <button type="submit" class="btn"> <img src="/static/search.png" width="20" height="20" alt="Go"></img> </button>
+        </form>
+        <form id = "title" class="form-inline global-search">
+        {% if data %}
+            <h1>{{output_message}}</h1>
+            {% for d in data %}  
+                <br>      
+                <div class = "container my-auto">
+                <div class="col s12">
+                    <h2 style = "color: white; font-family: rockwell; font-weight:bold" class="header">{{d.speaker}}</h2>
+                    <div class="card horizontal">
+                            <div class="card-image">
+                                <div class="profile"><img style = "border-radius: 50%;" src={{d.image}}></div>
+                            </div>
+                      <div class="card-stacked">
+                        <div class="card-content">
+                            <h3> {{d.debate_name}}</h3>
+                            <h3>{{d.debate_date}}</h3>
+                            <br><br>
+                          <p>{{d.speech}}</p>
+                        </div>
+                        <div class="card-action">
+                          <a href={{d.link}}><h3>Read More</h3></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="row">
+                    <div class = "container my-auto">
+                    <div class="col s12 m7">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src={{d.image}}>
+                          <span class="card-title">{{d.speaker}}</span>
+                        </div>
+                        <div class="card-content">
+                          <p>{{d.speech}}.</p>
+                        </div>
+                        <div class="card-action">
+                          <a href={{d.link}}>Read More</a>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+     -->
+
+            <br>
+            {% endfor %}
+            {% else %}
+            <h1>No results found</h1>
+        {% endif %}
+        </form>
+    </body>
+
+</html>
+
