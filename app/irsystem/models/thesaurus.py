@@ -2,12 +2,14 @@ import numpy as np
 import spacy
 from collections import defaultdict
 
+#Code adapted from the 2019 project Fun Fax's release code
+
 class Thesaurus:
 
     def __init__(self, nlp=None):
         self.nlp = nlp
         if self.nlp is None:
-            self.nlp = spacy.load('en_core_web_lg')
+            self.nlp = spacy.load('en_core_web_md')
         self.vocab = [w for w in self.nlp.vocab if w.is_lower and w.prob >= -15 and w.vector.any()]
         self.vocab_vectors = np.array([w.vector for w in self.vocab])
 
@@ -21,7 +23,6 @@ class Thesaurus:
             output += [word]
           else:
             sim_words = self.most_similar_by_embedding(word_vector, top)
-            sim_words.remove(word)
             output += sim_words
         return output
 

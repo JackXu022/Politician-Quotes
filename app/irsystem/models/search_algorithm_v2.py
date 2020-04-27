@@ -34,7 +34,9 @@ def get_top_n_related_v2(topic, n, politicians={}):
         topics += input
         for topic in input:
             syns = thesaurus.most_similar(topic)
-            topics += syns
+            for syn in syns:
+                if syn not in input:
+                    topics.append(syn)
         wc_matrix = np.zeros((len(topics), len(debate_data.index)))
         score_matrix = np.zeros((len(debate_data.index,)))
         for index, row in related_data.iterrows():
