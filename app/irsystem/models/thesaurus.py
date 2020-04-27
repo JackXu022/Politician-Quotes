@@ -15,14 +15,16 @@ class Thesaurus:
         words = word.split(" ")
         output = []
         for word in words:
-          word = word.strip
+          word = word.strip()
           word_vector = self.nlp.vocab[word].vector
           if not np.any(word_vector):
-              return [word]
-          most_sim = self.most_similar_by_embedding(word_vector, top)
-          most_sim.remove_word
-          output += most_sim
+            output += [word]
+          else:
+            sim_words = self.most_similar_by_embedding(word_vector, top)
+            sim_words.remove(word)
+            output += sim_words
         return output
+
 
     def most_similar_by_embedding(self, word_vector, top=3):
         sim = np.inner(word_vector, self.vocab_vectors)
