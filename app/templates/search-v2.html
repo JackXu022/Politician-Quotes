@@ -5,14 +5,15 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,400i,900&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="/static/bootstrap.min.css">
         <link rel="stylesheet" href="/static/main.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     </head>
     <body>
       <div>
-        <a style = "float: right; padding-right: 50px; font-size: 16px; font-family: 'Roboto'; font-weight: bold; color: white;  text-decoration: underline;" href = "/"> Prototype 1 </a>
+        <a style = "position: absolute; right: 0; padding-right: 50px; font-size: 22px; font-family: 'Roboto'; font-weight: bold; color: white;  text-decoration: underline;" href = "/"> Prototype 1 </a>
       </div> 
         <div class="topcorner">
-            <p>Arzu Mammadova: am2692, Aleah Markovic: adm265 <br> Matthew Prince: mp836, Zhaopeng Xu: zx273</p>
+            <div id = "about" > <i class="fa fa-info-circle" onclick="infoOn()" style="color: white; font-size:22px; cursor:pointer;"><p style="font-family:rockwell; font-size:22px; display:inline"> About </p></i></div>
         </div>
         
       
@@ -28,8 +29,18 @@
                 <input id="input" type="text" name="topic" class="form-control" placeholder="Input Topic">
                 <input id="input" type="text" name="politicians" class="form-control" placeholder="Input Politicians">
             </div>
-            <button type="submit" class="btn"> <img src="/static/search.png" width="20" height="20" alt="Go"></img> </button>
+            <button type="submit" class="btn" onfocusin="loaderOn()" onfocusout="loaderOff()"> <img src="/static/search.png" width="20" height="20" alt="Go"></img> </button>
         </form>
+        <div id = "loader-wrapper">
+          <div id = "loader"></div>
+         </div>
+        <div class = "project" id = "info">
+          <img class = 'x' src="/static/x.png" height = '25' weight = '25' onclick = "infoOff()" />
+          <h1>What is Politician Quotes?</h1>
+          <p>Politician Quotes is an app that is designed to help uninformed voters or researchers find out what some politicians have said on pressing topics.</p>
+          <p>This project was designed and implemented by Arzu Mammadova (am2692), Aleah Markovic (adm265), Matthew Prince (mp836), and Zhaopeng Xu (zx273).</p>
+          <p>We made this system for the final project of CS/INFO 4300 at Cornell University, taught by Professor DNM.</p>
+        </div>
         <form id = "title" class="form-inline global-search">
         {% if data %}
             <h1>{{output_message}}</h1>
@@ -82,6 +93,22 @@
             <h1>No results found</h1>
         {% endif %}
         </form>
+
+        <script>
+          function loaderOn() {
+            document.getElementById("loader").style.display = "block";
+          }
+          function loaderOff() {
+            document.getElementById("loader").style.display = "none";
+          }
+          function infoOn() {
+            document.getElementById("info").style.display = "block";
+          }
+          function infoOff() {
+            document.getElementById("info").style.display = "none";
+          }
+        </script>
+
     </body>
 
 </html>

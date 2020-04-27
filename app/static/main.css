@@ -43,12 +43,11 @@
     #logo {
         margin:auto;
         background-color: rgb(34,42,53);
-        text-align: center;
+        text-align:center;
     }
 
     #logo img {
-        margin: auto;
-        text-align: center;
+        margin:auto;
     }
 
     #input {
@@ -137,6 +136,76 @@
         margin-left: 15px;
         padding: 0px;
     }
+    #loader {
+        border: 16px solid white;
+        border-top: 16px solid rgb(0, 102, 153);
+        border-right: 16px solid white;
+        border-bottom: 16px solid rgb(165, 0, 33);
+        border-left: 16px solid white;
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 1s linear infinite;
+        margin: auto;
+        display: none;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0dg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .project {
+        position: absolute; /* Sit on top of the page content */
+        display: none; /* Hidden by default */
+        width: 700px; /* Full width (cover the whole page) */
+        height: 500px; /* Full height (cover the whole page) */
+        padding: 25px;
+        top: 0; 
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0 auto;
+        margin-top: 100px;
+        background-color: rgb(222, 222, 222);
+        border-radius: 10px;
+        z-index: 1000; /* Specify a stack order in case you're using a different order for other elements */
+        border: 7px solid grey;
+        box-shadow: 14px 14px 2px black;
+    }
+
+    .project .x {
+        cursor: pointer;
+       position: absolute;
+       right: 25;
+      }
+
+    .project h1 {
+        font-family: 'rockwell';
+        font-weight: bold;
+        font-size: 44px;
+        text-align: center;
+        margin:auto;
+        margin-top: 45px;
+        margin-bottom: 30px;
+        color: grey;
+    }
+
+    .project p 
+    {
+        font-family: 'roboto';
+        font-size: 18px;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin:auto;
+        margin-bottom: 15px;
+    }
+
+
+    
+
+
     #title h1
     {
         color:white;
@@ -165,31 +234,6 @@
         text-align: center;
         font-family: rockwell;
         font-weight: bold;
-    }
-
-    .btn:visited {
-        color: rgb(34, 42, 53);
-        font-family: 'roboto';
-        font-size: 18px;
-        font-weight: bold;
-        background-color: white;
-        border: 2px solid grey;
-        height: 32px;
-        width: 50px;
-        margin-left: 15px;
-        padding: 0px;
-    }
-    .btn:focus {
-        color: rgb(34, 42, 53);
-        font-family: 'roboto';
-        font-size: 18px;
-        font-weight: bold;
-        background-color: white;
-        border: 2px solid grey;
-        height: 32px;
-        width: 50px;
-        margin-left: 15px;
-        padding: 0px;
     }
 
     .card.horizontal {
