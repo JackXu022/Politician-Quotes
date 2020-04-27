@@ -4,6 +4,8 @@ from app.irsystem.models.helpers import NumpyEncoder as NumpyEncoder
 
 
 from app.irsystem.models.search_algorithm_v1 import get_top_n_related
+from app.irsystem.models.search_algorithm_v2 import get_top_n_related_v2
+
 
 project_name = "Politician Quotes"
 net_id = "Arzu Mammadova: am2692, Aleah Markovic: adm265, Matthew Price: mp836, Zhaopeng Xu: zx273"
@@ -32,6 +34,6 @@ def search_2():
 		output_message = ''
 	else:
 		output_message = "Topics: " + topic + '\n' + "Politicians: " + politicians
-		data = get_top_n_related(topic, 10, politicians)
+		data = get_top_n_related_v2(topic, 10, politicians)
 		# print(data)
 	return render_template('search-v2.html', name=project_name, netid=net_id, output_message=output_message, data=data)

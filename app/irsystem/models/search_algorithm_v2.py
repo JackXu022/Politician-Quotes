@@ -6,7 +6,7 @@ from .thesaurus import Thesaurus
 
 thesaurus = Thesaurus()
 
-def get_top_n_related(topic, n, politicians={}):
+def get_top_n_related_v2(topic, n, politicians={}):
     if n:
         n=int(n)
     else:
