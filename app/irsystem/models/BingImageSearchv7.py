@@ -33,6 +33,6 @@ def image_search(query):
         # print("\nHeaders:\n")
         # print(response.headers)
         # output the image link:
-        return response.json()['value'][0]['contentUrl']
+        return response.json()['value'][0]['thumbnailUrl']
     except Exception as ex:
         raise ex

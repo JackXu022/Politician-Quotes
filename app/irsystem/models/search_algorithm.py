@@ -1,24 +1,10 @@
-import collections
-from collections import Counter
-from collections import defaultdict
 from operator import itemgetter
 import pandas as pd
-import spacy
-import pandas as pd
-from collections import Counter
+import numpy as np
 from app.irsystem.models.BingImageSearchv7 import image_search
+from .thesaurus import Thesaurus
 
-
-nlp = spacy.load("en_core_web_sm", disable=['parser', 'ner'])
-
-# Taking into consideration only nouns so as to identify the topics.
-def only_nouns(texts):
-    output = []
-    doc = nlp(texts)
-    for token in doc:
-        if token.pos_ == "NOUN":
-            output.append(token.lemma_)
-    return output
+thesaurus = Thesaurus()
 
 def get_top_n_related(topic, n, politicians={}):
     if n:
@@ -36,46 +22,38 @@ def get_top_n_related(topic, n, politicians={}):
         input_politicians = []
         for politician in politicians:
             item = politician.split()
-            word=""
+            word = ""
             for name in item:
                 word += name.capitalize() + " "
             input_politicians.append(word.strip())
         input_politicians = set(input_politicians)
         related_data = debate_data.loc[debate_data.speaker.isin(input_politicians)]
     if topic:        
-        new_dict=defaultdict(dict)
-        # Base form of the topic, with no inflectional suffixes.
-        input_topic = topic.lower()
-        topics = set(only_nouns(input_topic))
+        input = [topic.strip() for topic in topic.split(",")]
+        topics = []
+        topics += input
+        for topic in input:
+            syns = thesaurus.most_similar(topic)
+            topics += syns
+        wc_matrix = np.zeros((len(topics), len(debate_data.index)))
+        score_matrix = np.zeros((len(debate_data.index,)))
         for index, row in related_data.iterrows():
-            word_dict = dict(Counter(str(row['speech_nouns']).split(" ")))
-            topic_intersect = topics.intersection(word_dict.keys())
-            if topic_intersect:
-                for item in topic_intersect:
-                    new_dict[item][index] = word_dict[item]
-        for tp in new_dict.keys():
-            od = sorted(new_dict[tp].items(), key=itemgetter(1), reverse=True)
-            i=0
-            for k, v in od: 
-                trans_info = debate_data.loc[k]
-                debate_name = trans_info['debate_name']
-                if 'Transcript:' in debate_name: 
-                    debate_name.replace('Transcript:', '')
-                obj = {"score": v, "debate_name": debate_name, "debate_date": trans_info['debate_date'], "speaker":trans_info['speaker'], "speech":trans_info['speech'], "link": trans_info["transcript_link"], "image":image_search(trans_info['speaker'])}
-                final_data.append(obj)
-                i+=1
-                if i==n:
-                    return final_data   
-    else:
-        new_dict=defaultdict(int)
-        i=0
-        # print("No topic !!!")
-        for index, row in related_data.iterrows():
-            debate_name = row['debate_name']
+            speech = row['speech']
+            column = wc_matrix[:,index]
+            it = np.nditer(column, flags=['f_index'], op_flags=['readwrite'])
+            while not it.finished:
+                idx = it.index
+                it[0] = speech.count(topics[idx])
+                it.iternext()
+            score_matrix[index] = np.sum(column)
+        top_indices = (-score_matrix).argsort()[:n]
+        for index in np.nditer(top_indices):
+            trans_info = related_data.loc[index]
+            debate_name = trans_info['debate_name']
             if 'Transcript:' in debate_name: 
                 debate_name.replace('Transcript:', '')
-            obj = {"score": index, "debate_name": debate_name, "debate_date": row['debate_date'], "speaker":row['speaker'], "speech":row['speech'], "link": row["transcript_link"], "image":image_search(trans_info['speaker'])}
+            obj = {"score": score_matrix[index], "debate_name": debate_name, "debate_date": trans_info['debate_date'], "speaker":trans_info['speaker'], "speech":trans_info['speech'], "link": trans_info["transcript_link"], "image":image_search(trans_info['speaker'])}
             final_data.append(obj)
-            i+=1
-            if i==n:
-                return final_data
+        return final_data
+    else:
+        return
