@@ -33,7 +33,7 @@ def get_top_n_related_v2(topic, n, politicians={}):
             words = topic.split(" ")
             for word in words:
                 if word not in topics:
-                    topic.append(word)
+                    topics.append(word)
         wc_matrix = np.zeros((len(topics), len(debate_data.index)))
         score_matrix = np.zeros((len(debate_data.index,)))
         for index, row in related_data.iterrows():
