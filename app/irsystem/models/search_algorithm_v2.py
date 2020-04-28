@@ -2,9 +2,6 @@ from operator import itemgetter
 import pandas as pd
 import numpy as np
 from app.irsystem.models.BingImageSearchv7 import image_search
-from .thesaurus import Thesaurus
-
-thesaurus = Thesaurus()
 
 def get_top_n_related_v2(topic, n, politicians={}):
     if n:
@@ -33,10 +30,10 @@ def get_top_n_related_v2(topic, n, politicians={}):
         topics = []
         topics += input
         for topic in input:
-            syns = thesaurus.most_similar(topic)
-            for syn in syns:
-                if syn not in input:
-                    topics.append(syn)
+            words = topic.split(" ")
+            for word in words:
+                if word not in topics:
+                    topic.append(word)
         wc_matrix = np.zeros((len(topics), len(debate_data.index)))
         score_matrix = np.zeros((len(debate_data.index,)))
         for index, row in related_data.iterrows():
