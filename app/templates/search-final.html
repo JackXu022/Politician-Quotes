@@ -6,12 +6,41 @@
         <link rel="stylesheet" href="/static/bootstrap.min.css">
         <link rel="stylesheet" href="/static/main.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+        <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+        <script src = https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js> </script>
+        <style> 
+        .highlight { 
+            background-color: yellow;
+        }
+
+        .highlightbtn{
+            display: block;
+            margin:auto;
+            color: rgb(34, 42, 53);
+            font-family: 'roboto';
+            font-size: 18px;
+            font-weight: bold;
+            background-color: white;
+            border: 3px solid white;
+            height: 32px;
+            width: 400px;
+            /* margin-left: 15px; */
+            padding: 3px;
+            box-shadow: 3px 3px 0px 1px grey;
+            transition: .5s;
+            transition-delay: 0s;
+        }
+
+        </style>
+      
 
     </head>
     <body>
       <div>
-        <a style = "position: absolute; right: 0; padding-right: 50px; font-size: 22px; font-family: 'Roboto'; font-weight: bold; color: white;  text-decoration: underline;" href = "/v1"> Prototype 1 </a>
+        <a style = "position: absolute; right: 0; padding-right: 50px; font-size: 22px; font-family: 'Roboto'; font-weight: bold; color: white;  text-decoration: underline;" href = "/v2"> Prototype 2 </a>
+      </div>
+      <div> 
+        <a style = "position: absolute; right: 100; padding-right: 200px; font-size: 22px; font-family: 'Roboto'; font-weight: bold; color: white;  text-decoration: underline;" href = "v1"> Prototype 1 </a>
       </div> 
         <div class="topcorner">
             <div id = "about" > <p onclick="infoOn()" style="color: white; font-size:22px; cursor:pointer; font-family:rockwell; font-size:22px; display:inline"> About </p></div>
@@ -27,7 +56,7 @@
             <br><br>
             
             <div class="form-group">
-                <input id="input" type="text" name="topic" class="form-control" placeholder="Input Topic">
+                <input id="input" type="text" name="topic" class="form-control topic" placeholder="Input Topic" onchange = "saveTopic(this.value)">
                 <input id="input" type="text" name="politicians" class="form-control" placeholder="Input Politicians">
             </div>
             <button type="submit" class="btn" onfocusin="loaderOn()" onfocusout="loaderOff()"> <img src="/static/search.png" width="20" height="20" alt="Go"></img> </button>
@@ -42,6 +71,8 @@
           <p>This project was designed and implemented by Arzu Mammadova (am2692), Aleah Markovic (adm265), Matthew Prince (mp836), and Zhaopeng Xu (zx273).</p>
           <p>We made this system for the final project of CS/INFO 4300 at Cornell University, taught by Professor DNM.</p>
         </div>
+
+        <button class = "highlightbtn" onclick = 'highlight()'>Highlight Topics</button>
         <form id = "title" class="form-inline global-search">
         {% if data %}
             <h1>{{output_message}}</h1>
@@ -57,9 +88,9 @@
                       <div class="card-stacked">
                         <div class="card-content">
                             <h3> {{d.debate_name}}</h3>
-                            <h3>{{d.debate_date}}</h3>
+                            <h3>{{d.debate_date}} </h3>
                             <br><br>
-                          <p>{{d.speech}}</p>
+                          <p class = 'speech'>{{d.speech}}</p>
                         </div>
                         <div class="card-action">
                           <a href={{d.link}}><h3>Read More</h3></a>
@@ -76,18 +107,58 @@
         </form>
 
         <script>
-          function loaderOn() {
+
+        function saveTopic(value) {
+
+            localStorage.setItem("topic", value);
+            // location.reload();
+            // return false;
+        }
+
+
+        function highlight() {
+
+
+            const outputs_html = document.getElementsByClassName('speech');
+            let keyWord =localStorage.getItem("topic");
+            const outputs = [...outputs_html];
+
+            if (keyWord.includes(',')) {
+                keyWord = keyWord.split(" ").join(""); 
+                const keywords = keyWord.split(","); 
+                console.log(keywords); 
+                outputs.forEach((item) => {
+                    keywords.forEach((keyword) => {
+                        const regexRule = new RegExp(keyword, 'g');
+                        item.innerHTML = item.innerHTML.replace(regexRule, `<mark class = "highlight">${keyword}</mark>`)
+                    })
+                })
+            }
+            else {
+
+                outputs.forEach((item) => {
+                    const regexRule = new RegExp(keyWord, 'g');
+                    item.innerHTML = item.innerHTML.replace(regexRule,  `<mark class = "highlight">${keyWord}</mark>`); 
+                    console.log(item.innerHTML);
+            })
+            }
+           
+                   }
+      
+        
+        function loaderOn() {
             document.getElementById("loader").style.display = "block";
           }
-          function loaderOff() {
+        function loaderOff() {
             document.getElementById("loader").style.display = "none";
           }
-          function infoOn() {
+        function infoOn() {
             document.getElementById("info").style.display = "block";
           }
-          function infoOff() {
+        function infoOff() {
             document.getElementById("info").style.display = "none";
           }
+
         </script>
 
     </body>

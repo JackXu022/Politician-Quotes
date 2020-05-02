@@ -39,6 +39,8 @@
         color: white;
     }
 
+    .highlight { background-color: yellow }
+
 
     #logo {
         margin:auto;
@@ -69,6 +71,7 @@
         box-shadow: 3px 3px 0px 1px rgb(0, 102, 153);
     }
 
+
     
 
     .btn {
@@ -87,6 +90,7 @@
         transition-delay: 0s;
 
     }
+
 
     .btn:hover {
         color: rgb(34, 42, 53);
