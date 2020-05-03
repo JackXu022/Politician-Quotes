@@ -2,14 +2,15 @@ from operator import itemgetter
 import pandas as pd
 import numpy as np
 from app.irsystem.models.BingImageSearchv7 import image_search
+from app.data.name_data import names 
 
-def get_top_n_related_v2(topic, n, politicians={}):
+def get_top_n(topic, n, politicians):
+    final_data = []
     if n:
         n=int(n)
     else:
         n=10
     debate_data = pd.read_csv('app/data/debate_transcripts_v5.csv')
-    final_data = []
     if not politicians and not topic:
         return
     if not politicians:
@@ -18,22 +19,27 @@ def get_top_n_related_v2(topic, n, politicians={}):
         politicians = [p.strip() for p in politicians.split(",")]
         input_politicians = []
         for politician in politicians:
-            item = politician.split()
-            word = ""
-            for name in item:
-                word += name.capitalize() + " "
-            input_politicians.append(word.strip())
+            #item = politician.split()
+            #word = ""
+            #for name in item:
+                #word += name.capitalize() + " "
+            #input_politicians.append(word.strip())
+            if politician in names.keys():
+                for p in names[politician]:
+                    input_politicians.append(p)
         input_politicians = set(input_politicians)
-        related_data = debate_data.loc[debate_data.speaker.isin(input_politicians)]
+        if len(input_politicians) > 0:
+            related_data = debate_data.loc[debate_data.speaker.isin(input_politicians)]
+        else: 
+            return
     if topic:        
         input = [topic.strip() for topic in topic.split(",")]
         topics = []
         topics += input
         for topic in input:
             words = topic.split(" ")
-            for word in words:
-                if word not in topics:
-                    topics.append(word)
+            if words[0] not in topics:
+                topics.append(words[0])
         wc_matrix = np.zeros((len(topics), len(debate_data.index)))
         score_matrix = np.zeros((len(debate_data.index,)))
         for index, row in related_data.iterrows():
