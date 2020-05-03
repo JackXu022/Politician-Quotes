@@ -20,18 +20,6 @@ for item in dict(names).items():
 name_list = list(name_list)
 name_list = json.dumps(name_list)
 
-print(name_list)
-# name_list = ','.join(name_list)
-# names = {
-#     "status": 1,
-#     "message": "politician names",
-#     "data": {
-#         "is_header": is_header,
-#         "head": json.loads(name_list.head().to_json())
-#     }
-# }
-      
-
 @irsystem.route('/', methods=['GET'])
 def search():
 	topic = request.args.get('topic')
