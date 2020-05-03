@@ -5,7 +5,7 @@ from app.irsystem.models.helpers import NumpyEncoder as NumpyEncoder
 
 from app.irsystem.models.search_algorithm_v1 import get_top_n_related
 from app.irsystem.models.search_algorithm_v2 import get_top_n_related_v2
-from app.irsystem.models.search_algorithm_final import get_top_n
+from app.irsystem.models.cosine_sim import get_top_n
 
 
 project_name = "Politician Quotes"
@@ -21,7 +21,7 @@ def search():
 		data = []
 		output_message = ''
 	else:
-		data = get_top_n(topic, 10, politicians)
+		data = get_top_n_related_v2(topic, 10, politicians)
 		if data:
 			output_message = "Topics: " + topic + '\n' + "Politicians: " + politicians
 		else: 

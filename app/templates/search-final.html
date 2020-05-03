@@ -16,26 +16,47 @@
           var arrayReturn = [];
           $.ajax({
             success: function (data) {
-              var countries = [
+              var topics = [
                  { value: 'health care'},
                  { value: 'gun violence'},
+                 { value: 'gun control'}, 
+                 { value: 'gun rights'}, 
                  { value: 'Russia'},
                  { value: 'tax reform'},
                  { value: 'medicare for all'},
                  { value: 'freedom dividend'},
+                 { value: 'climate change'}, 
+                 { value: 'immigration'}
+              ];
+
+              var politicians = [
+                  {value: 'Donald Trump'}, 
+                  {value: 'Joe Biden'}, 
+                  {value: 'Hillary Clinton'}, 
+                  {value: 'Bill Clinton'}, 
+                  {value: 'Barack Obama'}, 
+                  {value: 'Bernie Sanders'}, 
+                  {value: 'George W. Bush'}, 
+                  {value: 'Elizabeth Warren'}
               ];
               //send parse data to autocomplete function
-              loadSuggestions(countries);
-              console.log(countries);
+              loadSuggestions(topics, politicians);
+              
             }
           });
-          function loadSuggestions(options) {
+          function loadSuggestions(topics, politicians) {
             $('#autocomplete-1').autocomplete({
-              lookup: options,
+              lookup: topics,
               onSelect: function (suggestion) {
                 $('#selected_option').html(suggestion.value);
               }
             });
+            $('#autocomplete-2').autocomplete({
+                lookup: politicians, 
+                onSelect: function (suggestion) {
+                    $('#selected_option').html(suggestion.value); 
+                }
+            })
           }
           });
         </script>
@@ -66,7 +87,6 @@
             border: 3px solid white;
             height: 32px;
             width: 400px;
-            /* margin-left: 15px; */
             padding: 3px;
             box-shadow: 3px 3px 0px 1px grey;
             transition: .5s;
@@ -99,7 +119,7 @@
             
             <div class="form-group ui-widget">
                 <input id="autocomplete-1" type="text" name="topic" class="form-control topic" placeholder="Input Topic" onchange = "saveTopic(this.value)">
-                <input id="input" type="text" name="politicians" class="form-control" placeholder="Input Politicians">
+                <input id="autocomplete-2" type="text" name="politicians" class="form-control" placeholder="Input Politicians">
             </div>
             <button type="submit" class="btn" onfocusin="loaderOn()" onfocusout="loaderOff()"> <img src="/static/search.png" width="20" height="20" alt="Go"></img> </button>
         </form>
