@@ -11,7 +11,6 @@ def tokenize(text):
 docs = []
 data = pd.read_csv('app/data/debate_transcripts_v5.csv')
 for i in range(0, len(data['speech'])):
-    print(i)
     docs.append(dict())
     docs[i]['speaker'] = data['speaker'][i]
     docs[i]['text'] = tokenize(data['speech'][i])
