@@ -1,4 +1,4 @@
-<html>
+<html lang = "en">
     <head>
         <title>Politician Quotes</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -8,7 +8,49 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
         <script src = https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js> </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.27/jquery.autocomplete.min.js"></script>
+
+        <script type="text/javascript">
+          $(document).ready(function(){	
+          var arrayReturn = [];
+          $.ajax({
+            success: function (data) {
+              var countries = [
+                 { value: 'health care'},
+                 { value: 'gun violence'},
+                 { value: 'Russia'},
+                 { value: 'tax reform'},
+                 { value: 'medicare for all'},
+                 { value: 'freedom dividend'},
+              ];
+              //send parse data to autocomplete function
+              loadSuggestions(countries);
+              console.log(countries);
+            }
+          });
+          function loadSuggestions(options) {
+            $('#autocomplete-1').autocomplete({
+              lookup: options,
+              onSelect: function (suggestion) {
+                $('#selected_option').html(suggestion.value);
+              }
+            });
+          }
+          });
+        </script>
+
         <style> 
+        .autocomplete-suggestions { border-radius: 3px; border: 3px solid white; background: rgb(34,42,53); overflow: auto; transition: .4s 0s}
+        .autocomplete-suggestion { font-family: 'roboto'; color:white; padding: 2px 5px; border: 3px solid rgb(34, 42, 53); white-space: nowrap; overflow: hidden; transition: .1s 0s}
+        .autocomplete-suggestion:hover {cursor: pointer; background: rgb(34,42,53); border: 3px solid white; border-radius: 3px}
+        .autocomplete-selected { background: #F0F0F0;}
+        .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+        .autocomplete-group { padding: 2px 5px; }
+        .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+
+
+
         .highlight { 
             background-color: yellow;
         }
@@ -55,8 +97,8 @@
             
             <br><br>
             
-            <div class="form-group">
-                <input id="input" type="text" name="topic" class="form-control topic" placeholder="Input Topic" onchange = "saveTopic(this.value)">
+            <div class="form-group ui-widget">
+                <input id="autocomplete-1" type="text" name="topic" class="form-control topic" placeholder="Input Topic" onchange = "saveTopic(this.value)">
                 <input id="input" type="text" name="politicians" class="form-control" placeholder="Input Politicians">
             </div>
             <button type="submit" class="btn" onfocusin="loaderOn()" onfocusout="loaderOff()"> <img src="/static/search.png" width="20" height="20" alt="Go"></img> </button>
