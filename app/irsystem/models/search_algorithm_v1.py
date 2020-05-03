@@ -69,7 +69,6 @@ def get_top_n_related(topic, n, politicians={}):
     else:
         new_dict=defaultdict(int)
         i=0
-        # print("No topic !!!")
         for index, row in related_data.iterrows():
             debate_name = row['debate_name']
             if 'Transcript:' in debate_name: 
