@@ -4,13 +4,14 @@ import numpy as np
 import math
 from app.irsystem.models.BingImageSearchv7 import image_search
 
-def tokenize(str):
-    str = str.lower()
-    return re.findall("[a-z]+", str)
+def tokenize(text):
+    text = text.lower()
+    return re.findall("[a-z]+", text)
 
 docs = []
 data = pd.read_csv('app/data/debate_transcripts_v5.csv')
 for i in range(0, len(data['speech'])):
+    print(i)
     docs.append(dict())
     docs[i]['speaker'] = data['speaker'][i]
     docs[i]['text'] = tokenize(data['speech'][i])
