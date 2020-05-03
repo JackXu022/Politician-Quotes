@@ -115,10 +115,13 @@
             // return false;
         }
 
+    
+
+        let flag = true;
 
         function highlight() {
 
-
+            console.log(flag);
             const outputs_html = document.getElementsByClassName('speech');
             let keyWord =localStorage.getItem("topic");
             const outputs = [...outputs_html];
@@ -126,22 +129,30 @@
             if (keyWord.includes(',')) {
                 keyWord = keyWord.split(" ").join(""); 
                 const keywords = keyWord.split(","); 
-                console.log(keywords); 
                 outputs.forEach((item) => {
                     keywords.forEach((keyword) => {
-                        const regexRule = new RegExp(keyword, 'g');
-                        item.innerHTML = item.innerHTML.replace(regexRule, `<mark class = "highlight">${keyword}</mark>`)
+                        const regexRule = new RegExp(keyword, 'gi');
+                        const regexRule_undo = new RegExp(`<mark class="highlight">${keyword}</mark>`, 'gi')
+                        item.innerHTML = flag ? item.innerHTML.replace(regexRule, `<mark class = "highlight">${keyword}</mark>`) : item.innerHTML.replace(regexRule_undo, keyword);
                     })
                 })
+                flag = !flag; 
+    
             }
             else {
-
+                const regexRule = new RegExp(keyWord, 'gi');
+                const regexRule_undo = new RegExp(`<mark class="highlight">${keyWord}</mark>`, 'gi')
                 outputs.forEach((item) => {
-                    const regexRule = new RegExp(keyWord, 'g');
-                    item.innerHTML = item.innerHTML.replace(regexRule,  `<mark class = "highlight">${keyWord}</mark>`); 
-                    console.log(item.innerHTML);
+                    
+                    
+                    item.innerHTML = flag ? item.innerHTML.replace(regexRule, `<mark class = "highlight">${keyWord}</mark>`) : item.innerHTML.replace(regexRule_undo, keyWord);
+                   
             })
+
+                flag = !flag; 
+             
             }
+            
            
                    }
       
