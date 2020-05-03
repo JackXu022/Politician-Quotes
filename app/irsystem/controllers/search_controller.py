@@ -6,6 +6,7 @@ from app.irsystem.models.helpers import NumpyEncoder as NumpyEncoder
 from app.irsystem.models.search_algorithm_v1 import get_top_n_related
 from app.irsystem.models.search_algorithm_v2 import get_top_n_related_v2
 from app.irsystem.models.cosine_sim import get_top_n
+from app.data.name_data import names
 
 
 project_name = "Politician Quotes"
@@ -27,7 +28,7 @@ def search():
 		else: 
 			output_message = 'No results found'
 		
-	return render_template('search-final.html', name=project_name, netid=net_id, output_message=output_message, topic=topic, data=data)
+	return render_template('search-final.html', name=project_name, netid=net_id, output_message=output_message, topic=topic, data=data, names = names)
 
 
 

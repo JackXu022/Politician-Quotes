@@ -12,38 +12,106 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.27/jquery.autocomplete.min.js"></script>
 
         <script type="text/javascript">
-          $(document).ready(function(){	
-          var arrayReturn = [];
-          $.ajax({
-            success: function (data) {
-              var topics = [
-                 { value: 'health care'},
-                 { value: 'gun violence'},
-                 { value: 'gun control'}, 
-                 { value: 'gun rights'}, 
-                 { value: 'Russia'},
-                 { value: 'tax reform'},
-                 { value: 'medicare for all'},
-                 { value: 'freedom dividend'},
-                 { value: 'climate change'}, 
-                 { value: 'immigration'}
-              ];
 
-              var politicians = [
-                  {value: 'Donald Trump'}, 
-                  {value: 'Joe Biden'}, 
-                  {value: 'Hillary Clinton'}, 
-                  {value: 'Bill Clinton'}, 
-                  {value: 'Barack Obama'}, 
-                  {value: 'Bernie Sanders'}, 
-                  {value: 'George W. Bush'}, 
-                  {value: 'Elizabeth Warren'}
-              ];
-              //send parse data to autocomplete function
-              loadSuggestions(topics, politicians);
+        const politicianlist = []; 
+          $(document).ready(function(){
               
-            }
-          });
+            var arrayReturn = [];
+            $.ajax({
+                success: function (data) {
+
+                var topics = [
+                    { value: 'health care'},
+                    { value: 'gun violence'},
+                    { value: 'gun control'}, 
+                    { value: 'gun rights'}, 
+                    { value: 'Russia'},
+                    { value: 'Iran'},
+                    { value: 'Mexico'}, 
+                    { value: 'Canada'}, 
+                    { value: 'Afghanistan'}, 
+                    { value: 'Cuba'}, 
+                    { value: 'United Kingdom'}, 
+                    { value: 'Israel'}, 
+                    { value: 'farm subsidies'}, 
+                    { value: 'agriculture'}, 
+                    { value: 'tax reform'},
+                    { value: 'taxes'},
+                    { value: 'universal health care'},
+                    { value: 'Obamacare'}, 
+                    { value: 'freedom dividend'},
+                    { value: 'climate change'}, 
+                    { value: 'immigration reform'}, 
+                    { value: 'immigration'},
+                    { value: 'supreme court'}, 
+                    { value: 'voter fraud'}, 
+                    { value: 'social security'}, 
+                    { value: 'citizenship'}, 
+                    { value: 'dual citizenship'}, 
+                    { value: 'green card'}, 
+                    { value: 'citizenship test'}, 
+                    { value: 'planned parenthood'}, 
+                    { value: 'abortion'}, 
+                    { value: 'religious freedom act'}, 
+                    { value: 'vaccines'}, 
+                    { value: 'privacy rights'}, 
+                    { value: 'marriage equality'}, 
+                    { value: 'lives matter'}, 
+                    { value: 'student loan crisis'}, 
+                    { value: 'student loans'}, 
+                    { value: 'in-state tuition'}, 
+                    { value: 'affirmative action'}, 
+                    { value: 'transgender rights'}, 
+                    { value: 'gay rights'}, 
+                    { value: 'animal rights'}, 
+                    { value: 'child support'}, 
+                    { value: 'poverty'}, 
+                    { value: 'opioid crisis'}, 
+                    { value: 'electoral college'}, 
+                    { value: 'free market'}, 
+                    { value: 'free market capitalism'}, 
+                    { value: 'obesity'}, 
+                    { value: 'LGBT adoption rights'}, 
+                    { value: 'gender workplace diversity'}, 
+                    { value: 'minimum wage'}, 
+                    { value: 'military service'}, 
+                    { value: 'border wall'}, 
+                    { value: 'border security'}, 
+                    { value: 'alternative energy'}, 
+                    { value: 'trade war'}, 
+                    { value: 'oil drilling'}, 
+                    { value: 'foreign elections' }, 
+                    { value: 'NAFTA'}, 
+                    { value: 'NATO'}, 
+                    { value: 'firearms'}, 
+                    { value: 'civil rights'}, 
+                    { value: 'death penalty'}, 
+                    { value: 'tobacco'}, 
+                    { value: 'terrorism'}, 
+                    { value: 'corruption'}, 
+                    { value: 'drug policy'}, 
+                    { value: 'drugs'}, 
+                    { value: 'unemployment'}, 
+                    { value: 'economic crisis'}, 
+                    { value: 'coronavirus'}, 
+                    { value: 'quarantine'}
+                ];
+
+                var politicians = [
+                    {value: 'Donald Trump'}, 
+                    {value: 'Joe Biden'}, 
+                    {value: 'Hillary Clinton'}, 
+                    {value: 'Bill Clinton'}, 
+                    {value: 'Barack Obama'}, 
+                    {value: 'Bernie Sanders'}, 
+                    {value: 'George W. Bush'}, 
+                    {value: 'Elizabeth Warren'}
+                ];
+                //send parse data to autocomplete function
+                loadSuggestions(topics, politicians);
+                
+                }
+            });
           function loadSuggestions(topics, politicians) {
             $('#autocomplete-1').autocomplete({
               lookup: topics,
