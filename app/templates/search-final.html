@@ -207,9 +207,8 @@
             
             
             <br><br>
-            
             <div class="form-group ui-widget">
-                <input id="autocomplete-1" type="text" name="topic" class="form-control topic" placeholder="Input Topic" onchange = "saveTopic(this.value)">
+                <input id="autocomplete-1" type="text" name="topic" class="form-control topic" placeholder="Input Topic" >
                 <input id="autocomplete-2" type="text" name="politicians" class="form-control" placeholder="Input Politicians">
                 <!-- <input style = "max-width: 200px"id ="year" type = "number" name = "year" class = "form-control" placeholder='Year between x and y'>  -->
                 <select id = "party" style = "max-width: 200px; height: 35px">
@@ -218,7 +217,7 @@
                     <option value = 'rp'>Republican</option>
                 </select>
             </div>
-            <button type="submit" class="btn" onfocusin="loaderOn()" onfocusout="loaderOff()"> <img src="/static/search.png" width="20" height="20" alt="Go"></img> </button>
+            <button type="submit" class="btn" onfocusin="loaderOn()" onfocusout="loaderOff()" onclick="saveTopic()"> <img src="/static/search.png" width="20" height="20" alt="Go"></img> </button>
         </form>
         <div id = "loader-wrapper">
           <div id = "loader"></div>
@@ -231,8 +230,11 @@
           <p>We made this system for the final project of CS/INFO 4300 at Cornell University, taught by Professor DNM.</p>
         </div>
 
-        <button class = "highlightbtn" onclick = 'highlight()'>Highlight Topics</button>
+        <button class = "highlightbtn" id = "hl" onclick = 'highlight()'>Highlight Topics</button>
+
+        
         <form id = "title" class="form-inline global-search">
+        
         {% if data %}
             <h1>{{output_message}}</h1>
             {% for d in data %}  
@@ -268,12 +270,16 @@
 
         <script>
 
-        function saveTopic(value) {
+        // function highlightVisible(){
+        //     document.getElementById("hl").style.visibility = visible;
+        // }
 
+        function saveTopic() {
+
+            value = document.getElementById('autocomplete-1').value;
+            console.log(value)
             localStorage.setItem("topic", value);
         }
-
-    
 
         let flag = true;
 
@@ -281,6 +287,7 @@
 
             const outputs_html = document.getElementsByClassName('speech');
             let keyWord =localStorage.getItem("topic");
+            console.log(keyWord)
             const outputs = [...outputs_html];
 
             if (keyWord.includes(',')) {
@@ -298,20 +305,16 @@
             }
             else {
                 const regexRule = new RegExp(keyWord, 'gi');
+                console.log(keyWord);
                 const regexRule_undo = new RegExp(`<mark class="highlight">${keyWord}</mark>`, 'gi')
-                outputs.forEach((item) => {
-                    
-                    
+                outputs.forEach((item) => {                    
                     item.innerHTML = flag ? item.innerHTML.replace(regexRule, `<mark class = "highlight">${keyWord}</mark>`) : item.innerHTML.replace(regexRule_undo, keyWord);
-                   
+       
             })
 
                 flag = !flag; 
              
-            }
-            
-           
-                   }
+            }}
       
         
         function loaderOn() {

@@ -34,7 +34,7 @@ def search():
 	return render_template('search-final.html', name=project_name, netid=net_id, output_message=output_message, topic=topic, data=data, names = names)
 
 @irsystem.route('/names', methods = ['GET'])
-def names(): 
+def name(): 
 	name_list = set()
 	for item in dict(names).items():
 		name = item[1][0]
