@@ -12,12 +12,27 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.27/jquery.autocomplete.min.js"></script>
 
         <script type="text/javascript">
+        
+        fetch('/names')
+                .then(function(res) {
+                    return res.json()
+                                })
+                .then(function(json){
+                    localStorage.setItem("politicianlist", json)
+                });
 
-        const politicianlist = []; 
+            let politicianlist = localStorage.getItem('politicianlist').split(",");
+            politicianlist = politicianlist.map(function(p) {
+                return { value: p}
+            });
+
+            
           $(document).ready(function(){
-              
+
+            
             var arrayReturn = [];
             $.ajax({
+                
                 success: function (data) {
 
                 var topics = [
@@ -97,16 +112,7 @@
                     { value: 'quarantine'}
                 ];
 
-                var politicians = [
-                    {value: 'Donald Trump'}, 
-                    {value: 'Joe Biden'}, 
-                    {value: 'Hillary Clinton'}, 
-                    {value: 'Bill Clinton'}, 
-                    {value: 'Barack Obama'}, 
-                    {value: 'Bernie Sanders'}, 
-                    {value: 'George W. Bush'}, 
-                    {value: 'Elizabeth Warren'}
-                ];
+                var politicians = politicianlist;
                 //send parse data to autocomplete function
                 loadSuggestions(topics, politicians);
                 
@@ -127,6 +133,7 @@
             })
           }
           });
+
         </script>
 
         <style> 
