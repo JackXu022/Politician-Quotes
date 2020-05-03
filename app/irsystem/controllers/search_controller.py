@@ -24,6 +24,7 @@ name_list = json.dumps(name_list)
 def search():
 	topic = request.args.get('topic')
 	politicians = request.args.get('politicians')
+	party = request.args.get('party')
 	if not topic and not politicians:
 		data = []
 		output_message = ''
