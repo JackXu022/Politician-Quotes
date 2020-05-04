@@ -25,19 +25,21 @@ def search():
 	if not topic and not politicians:
 		data = []
 		output_message = ''
+		year_message = ''
 	else:
-		data = get_top_n(topic, 10, politicians, party, year)
+		data_tuple = get_top_n(topic, 10, politicians, party, year)
+		data = data_tuple[0]
+		year_message = data_tuple[1]['message']
 		for speech in data:
 			text = speech['speech']
 			sim_list = get_3_sim_cosine(text)
 			speech['sim'] = sim_list
-
-		if data:
-			output_message = "Topics: " + topic + '\n' + "Politicians: " + politicians
+		if data:                
+			output_message = "Topics: " + topic + ' \n ' + "Politicians: " + politicians
 		else: 
 			output_message = 'No results found'
 		
-	return render_template('search-final.html', name=project_name, netid=net_id, output_message=output_message, topic=topic, data=data, names = names)
+	return render_template('search-final.html', name=project_name, netid=net_id, output_message=output_message, year_message=year_message, topic=topic, data=data, names = names)
 
 @irsystem.route('/names', methods = ['GET'])
 def name(): 

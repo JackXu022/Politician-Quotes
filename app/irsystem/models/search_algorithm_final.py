@@ -11,6 +11,7 @@ def get_top_n(topic, n, politicians, party, year):
     else:
         n=10
     debate_data = pd.read_csv('app/data/debate_transcripts_v5.csv')
+    output_message = ''
 
     if not politicians and not topic:
         return []
@@ -37,6 +38,8 @@ def get_top_n(topic, n, politicians, party, year):
         if not year_data.empty: 
             print('year data not empty')
             related_data = year_data
+        else: 
+            output_message = 'Sorry, no results were found for ' + year + '. See results from other years below.'
     if topic:        
         input = [topic.strip() for topic in topic.split(",")]
         topics = []
@@ -66,6 +69,6 @@ def get_top_n(topic, n, politicians, party, year):
                     debate_name.replace('Transcript:', '')
                 obj = {"score": score_matrix[index], "debate_name": debate_name, "debate_date": trans_info['debate_date'], "speaker":trans_info['speaker'], "speech":trans_info['speech'], "link": trans_info["transcript_link"], "image":image_search(trans_info['speaker']), "party":trans_info['party']}
                 final_data.append(obj)
-        return final_data
+        return (final_data, {'message': output_message})
     else:
-        return []
+        return ([], {'message': output_message})
