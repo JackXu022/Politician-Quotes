@@ -12,12 +12,17 @@ def get_top_n(topic, n, politicians, party, year):
         n=10
     debate_data = pd.read_csv('app/data/debate_transcripts_v5.csv')
     output_message = ''
-
     if not politicians and not topic:
-        return []
+        return ([], {'message': output_message})
     if not politicians:
-        related_data = debate_data       
-    else:
+        related_data = debate_data   
+    if year: 
+        new_data = debate_data.loc[debate_data.debate_year.isin([year])]
+        if (not new_data.empty): 
+            related_data = new_data
+        else: 
+            output_message = 'Sorry, no data was found for the year of ' + year + '. See results from other years below.'    
+    if politicians:
         politicians = [p.strip() for p in politicians.split(",")]
         input_politicians = []
         for politician in politicians:
@@ -28,17 +33,11 @@ def get_top_n(topic, n, politicians, party, year):
         if len(input_politicians) > 0:
             related_data = debate_data.loc[debate_data.speaker.isin(input_politicians)]
         else: 
-            return []
+            return ([], {'message': output_message})
     if party == "dm":
         related_data = related_data.loc[related_data.party.isin(["Democratic"])]
     elif party == "rp":
         related_data = related_data.loc[related_data.party.isin(["Republican"])]
-    if year: 
-        new_data = related_data.loc[related_data.debate_year.isin([year])]
-        if (not new_data.empty): 
-            related_data = new_data
-        else: 
-            output_message = 'Sorry, no results were found for ' + year + '. See results from other years below.'
     if topic:        
         input = [topic.strip() for topic in topic.split(",")]
         topics = []
@@ -66,23 +65,22 @@ def get_top_n(topic, n, politicians, party, year):
                 debate_name = trans_info['debate_name']
                 new_party = trans_info['party']
                 if 'Transcript:' in debate_name: 
-                    debate_name = debate_name.replace('Transcript:', '')
-                if trans_info['party'] == 'Democratic':
-                    new_party = 'Democrat'
-                obj = {"year": trans_info["debate_year"], "score": score_matrix[index], "debate_name": debate_name, "debate_date": trans_info['debate_date'], "speaker":trans_info['speaker'], "speech":trans_info['speech'], "link": trans_info["transcript_link"], "image":image_search(trans_info['speaker']), "party":new_party}
+                    debate_name.replace('Transcript:', '')
+                if trans_info['party'] == 'Democratic': 
+                    out_party = 'Democrat'
+                else:
+                    out_party = trans_info["party"]
+                obj = {"year": trans_info["debate_year"], "score": score_matrix[index], "debate_name": debate_name, "debate_date": trans_info['debate_date'], "speaker":trans_info['speaker'], "speech":trans_info['speech'], "link": trans_info["transcript_link"], "image":image_search(trans_info['speaker']), "party":out_party}
                 final_data.append(obj)
-        # if year:
-        #     print('type of input is', type(year)) 
+        # if year: 
         #     new_data = []
         #     for x in final_data: 
-        #         quote_year = str(x['year'])
-        #         if quote_year==year:
+        #         if year == x["year"]: 
         #             new_data.append(x)
-        #     if len(new_data) != 0:
+        #     if len(new_data) != 0: 
         #         final_data = new_data
         #     else: 
         #         output_message = 'Sorry, no results were found for ' + year + '. See results from other years below.'
-
         return (final_data, {'message': output_message})
     else:
         return ([], {'message': output_message})

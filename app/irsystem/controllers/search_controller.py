@@ -37,7 +37,14 @@ def search():
 		if data:                
 			output_message = "Topics: " + topic + ' \n ' + "Politicians: " + politicians
 		else: 
-			output_message = 'No results found'
+			if year and topic and politicians: 
+				output_message = 'Sorry, no quotes by ' + politicians + ' were found on the topic of "' + topic + '" from ' + year + '.'
+			elif not year and topic and politicians: 
+				output_message = 'Sorry, no quotes by ' + politicians + ' were found on the topic of "' + topic + '".'
+			elif year and topic and not politicians: 
+				output_message = 'Sorry, no quotes were found on the topic of "' + topic + '" from ' + year + '.'
+			elif not year and topic:
+				output_message = 'No results found for the topic of "' + topic + '".'
 		
 	return render_template('search-final.html', name=project_name, netid=net_id, output_message=output_message, year_message=year_message, topic=topic, data=data, names = names)
 

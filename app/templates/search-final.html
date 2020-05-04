@@ -225,6 +225,10 @@
     .card-similar {
       display: none;
     }
+
+    #back {
+      display: none;
+    }
   </style>
 
 
@@ -258,8 +262,9 @@
     <div class="form-group ui-widget">
       <input id="autocomplete-1" type="text" name="topic" class="form-control topic" placeholder="Input Topic(s)">
       <input id="autocomplete-2" type="text" name="politicians" class="form-control" placeholder="Input Politician(s)">
-      <input style = "max-width: 220px"id ="year" type = "text" name = "year" class = "form-control" placeholder='Year between 2002 and 2020'> 
-      <select id="party" name = 'party' style="max-width: 200px; height: 33px">
+      <input style="max-width: 220px" id="year" type="number" name="year" min="2008" max="2020" class="form-control"
+        placeholder='Year between 2008 and 2020'>
+      <select id="party" name='party' style="max-width: 200px; height: 33px">
         <option>Select Political Party</option>
         <option value='any'>Any party</option>
         <option value='dm'>Democratic</option>
@@ -280,22 +285,23 @@
     <p>This project was designed and implemented by Arzu Mammadova (am2692), Aleah Markovic (adm265), Matthew Prince
       (mp836), and Zhaopeng Xu (zx273).</p>
     <p>We made this system for the final project of CS/INFO 4300 at Cornell University, taught by Professor DNM.</p>
-    <p>Our code can be viewed on GitHub <a href = 'https://github.com/arzumm/cs4300sp2020-am2692-mp836-adm265-zx273'>here.</a></p>
+    <p>Our code can be viewed on GitHub <a
+        href='https://github.com/arzumm/cs4300sp2020-am2692-mp836-adm265-zx273'>here.</a></p>
   </div>
 
-  <button style = "display:none" class ="highlightbtn" id="hl" onclick='highlight()'>Highlight Topics</button>
+  <button style="display:none" class="highlightbtn" id="hl" onclick='highlight()'>Highlight Topics</button>
 
 
   <form id="title" class="form-inline global-search">
 
     {% if data %}
-    <script style = "display: none">
+    <script style="display: none">
       document.getElementById("hl").style.display = 'block';
     </script>
-    <h1>{{output_message}}</h1></br> 
-    <h3 style = "color: red">{{year_message}}</h3>
-    <br> 
-    <br> 
+    <h1>{{output_message}}</h1></br>
+    <h3 style="color: red">{{year_message}}</h3>
+    <br>
+    <br>
     {% for d in data %}
     <br>
     <div class="container my-auto">
@@ -328,6 +334,7 @@
             </div>
             <div class="show">
               <p>See Similar Quotes</p>
+              <p id = "back">Go Back</p>
             </div>
             <div class="card-action">
               <a href={{d.link}}>
@@ -351,7 +358,7 @@
 
     $('.show').click(function () {
       $(this).siblings().toggle();
-      $(this).html('<p>Go Back</p>')
+      $(this).children().toggle();
 
     })
 
