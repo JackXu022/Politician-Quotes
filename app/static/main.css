@@ -230,7 +230,8 @@
     {
         color:white;
         font-family: roboto;
-        font-weight: bold;
+        font-weight: normal;
+        font-size: small;
         text-shadow: 2px 2px 1px black;
     }
     .card-title
