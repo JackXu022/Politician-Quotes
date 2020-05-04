@@ -277,7 +277,6 @@
         function saveTopic() {
 
             value = document.getElementById('autocomplete-1').value;
-            console.log(value)
             localStorage.setItem("topic", value);
         }
 
@@ -287,7 +286,6 @@
 
             const outputs_html = document.getElementsByClassName('speech');
             let keyWord =localStorage.getItem("topic");
-            console.log(keyWord)
             const outputs = [...outputs_html];
 
             if (keyWord.includes(',')) {
@@ -305,7 +303,6 @@
             }
             else {
                 const regexRule = new RegExp(keyWord, 'gi');
-                console.log(keyWord);
                 const regexRule_undo = new RegExp(`<mark class="highlight">${keyWord}</mark>`, 'gi')
                 outputs.forEach((item) => {                    
                     item.innerHTML = flag ? item.innerHTML.replace(regexRule, `<mark class = "highlight">${keyWord}</mark>`) : item.innerHTML.replace(regexRule_undo, keyWord);
