@@ -33,13 +33,6 @@ def get_top_n(topic, n, politicians, party, year):
         related_data = related_data.loc[related_data.party.isin(["Democrat"])]
     elif party == "rp":
         related_data = related_data.loc[related_data.party.isin(["Republican"])]
-    if year: 
-        year_data = related_data.loc[related_data.debate_year.isin([year])]
-        if not year_data.empty: 
-            print('year data not empty')
-            related_data = year_data
-        else: 
-            output_message = 'Sorry, no results were found for ' + year + '. See results from other years below.'
     if topic:        
         input = [topic.strip() for topic in topic.split(",")]
         topics = []
@@ -67,8 +60,18 @@ def get_top_n(topic, n, politicians, party, year):
                 debate_name = trans_info['debate_name']
                 if 'Transcript:' in debate_name: 
                     debate_name.replace('Transcript:', '')
-                obj = {"score": score_matrix[index], "debate_name": debate_name, "debate_date": trans_info['debate_date'], "speaker":trans_info['speaker'], "speech":trans_info['speech'], "link": trans_info["transcript_link"], "image":image_search(trans_info['speaker']), "party":trans_info['party']}
+                obj = {"year": trans_info["debate_year"], "score": score_matrix[index], "debate_name": debate_name, "debate_date": trans_info['debate_date'], "speaker":trans_info['speaker'], "speech":trans_info['speech'], "link": trans_info["transcript_link"], "image":image_search(trans_info['speaker']), "party":trans_info['party']}
                 final_data.append(obj)
+        if year: 
+            new_data = []
+            for x in final_data: 
+                if year == x["year"]: 
+                    new_data.append(x)
+            if len(new_data) != 0: 
+                final_data = new_data
+            else: 
+                output_message = 'Sorry, no results were found for ' + year + '. See results from other years below.'
+
         return (final_data, {'message': output_message})
     else:
         return ([], {'message': output_message})
