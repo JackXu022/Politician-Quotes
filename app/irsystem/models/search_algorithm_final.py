@@ -60,6 +60,8 @@ def get_top_n(topic, n, politicians, party, year):
                 debate_name = trans_info['debate_name']
                 if 'Transcript:' in debate_name: 
                     debate_name.replace('Transcript:', '')
+                if trans_info['party'] == 'Democratic': 
+                    trans_info['party'] = 'Democrat'
                 obj = {"year": trans_info["debate_year"], "score": score_matrix[index], "debate_name": debate_name, "debate_date": trans_info['debate_date'], "speaker":trans_info['speaker'], "speech":trans_info['speech'], "link": trans_info["transcript_link"], "image":image_search(trans_info['speaker']), "party":trans_info['party']}
                 final_data.append(obj)
         if year: 
