@@ -259,7 +259,7 @@
       <input id="autocomplete-1" type="text" name="topic" class="form-control topic" placeholder="Input Topic(s)">
       <input id="autocomplete-2" type="text" name="politicians" class="form-control" placeholder="Input Politician(s)">
       <input style = "max-width: 220px"id ="year" type = "number" name = "year" class = "form-control" placeholder='Year between 2002 and 2020'> 
-      <select id="party" style="max-width: 200px; height: 33px">
+      <select id="party" name = 'party' style="max-width: 200px; height: 33px">
         <option>Select Political Party</option>
         <option value='any'>Any party</option>
         <option value='dm'>Democrat</option>
@@ -299,7 +299,7 @@
     <br>
     <div class="container my-auto">
       <div class="col s12">
-        <h2 style="color: white; font-family: rockwell; font-weight:bold" class="header">{{d.speaker}}</h2>
+        <h2 style="color: white; font-family: rockwell; font-weight:bold" class="header">{{d.speaker}}, {{d.party}}</h2>
         <div class="card horizontal">
           <div class="card-image">
             <div class="profile"><img style="border-radius: 50%;" src={{d.image}}></div>

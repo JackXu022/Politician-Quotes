@@ -30,7 +30,7 @@ def get_top_n(topic, n, politicians, party, year):
         else: 
             return []
     if party == "dm":
-        related_data = related_data.loc[related_data.party.isin(["Democrat"])]
+        related_data = related_data.loc[related_data.party.isin(["Democratic"])]
     elif party == "rp":
         related_data = related_data.loc[related_data.party.isin(["Republican"])]
     if topic:        
