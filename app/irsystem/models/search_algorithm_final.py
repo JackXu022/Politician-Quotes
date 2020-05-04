@@ -17,11 +17,7 @@ def get_top_n(topic, n, politicians, party, year):
     if not politicians:
         related_data = debate_data   
     if year: 
-        new_data = debate_data.loc[debate_data.debate_year.isin([year])]
-        if (not new_data.empty): 
-            related_data = new_data
-        else: 
-            output_message = 'Sorry, no data was found for the year of ' + year + '. See results from other years below.'    
+        related_data = debate_data.loc[debate_data.debate_year.isin([year])]   
     if politicians:
         politicians = [p.strip() for p in politicians.split(",")]
         input_politicians = []
@@ -72,15 +68,6 @@ def get_top_n(topic, n, politicians, party, year):
                     out_party = trans_info["party"]
                 obj = {"year": trans_info["debate_year"], "score": score_matrix[index], "debate_name": debate_name, "debate_date": trans_info['debate_date'], "speaker":trans_info['speaker'], "speech":trans_info['speech'], "link": trans_info["transcript_link"], "image":image_search(trans_info['speaker']), "party":out_party}
                 final_data.append(obj)
-        # if year: 
-        #     new_data = []
-        #     for x in final_data: 
-        #         if year == x["year"]: 
-        #             new_data.append(x)
-        #     if len(new_data) != 0: 
-        #         final_data = new_data
-        #     else: 
-        #         output_message = 'Sorry, no results were found for ' + year + '. See results from other years below.'
         return (final_data, {'message': output_message})
     else:
         return ([], {'message': output_message})
