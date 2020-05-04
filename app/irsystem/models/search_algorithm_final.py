@@ -4,14 +4,14 @@ import numpy as np
 from app.irsystem.models.BingImageSearchv7 import image_search
 from app.data.name_data import names 
 
-def get_top_n(topic, n, politicians, party):
-    print(party)
+def get_top_n(topic, n, politicians, party, year):
     final_data = []
     if n:
         n=int(n)
     else:
         n=10
     debate_data = pd.read_csv('app/data/debate_transcripts_v5.csv')
+
     if not politicians and not topic:
         return []
     if not politicians:
@@ -32,6 +32,11 @@ def get_top_n(topic, n, politicians, party):
         related_data = related_data.loc[related_data.party.isin(["Democrat"])]
     elif party == "rp":
         related_data = related_data.loc[related_data.party.isin(["Republican"])]
+    if year: 
+        year_data = related_data.loc[related_data.debate_year.isin([year])]
+        if not year_data.empty: 
+            print('year data not empty')
+            related_data = year_data
     if topic:        
         input = [topic.strip() for topic in topic.split(",")]
         topics = []
