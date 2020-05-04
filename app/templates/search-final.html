@@ -1,366 +1,418 @@
-<html lang = "en">
-    <head>
-        <title>Politician Quotes</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,400i,900&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="/static/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/main.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
-        <script src = https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js> </script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.27/jquery.autocomplete.min.js"></script>
+<html lang="en">
 
-        <script type="text/javascript">
-        
-        fetch('/names')
-                .then(function(res) {
-                    return res.json()
-                                })
-                .then(function(json){
-                    localStorage.setItem("politicianlist", json)
-                });
+<head>
+  <title>Politician Quotes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,400i,900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+    integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+  <script src=https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js> </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.27/jquery.autocomplete.min.js"></script>
 
-            let politicianlist = localStorage.getItem('politicianlist').split(",");
-            politicianlist = politicianlist.map(function(p) {
-                return { value: p}
-            });
+  <script type="text/javascript">
 
+    fetch('/names')
+      .then(function (res) {
+        return res.json()
+      })
+      .then(function (json) {
+        localStorage.setItem("politicianlist", json)
+      });
 
-          $(document).ready(function(){
-
-            
-            var arrayReturn = [];
-            $.ajax({
-                
-                success: function (data) {
-
-                var topics = [
-                    { value: 'health care'},
-                    { value: 'gun violence'},
-                    { value: 'gun control'}, 
-                    { value: 'gun rights'}, 
-                    { value: 'Russia'},
-                    { value: 'Iran'},
-                    { value: 'Mexico'}, 
-                    { value: 'Canada'}, 
-                    { value: 'Afghanistan'}, 
-                    { value: 'Cuba'}, 
-                    { value: 'Middle East'},
-                    { value: 'United Kingdom'}, 
-                    { value: 'Israel'}, 
-                    { value: 'China'}, 
-                    { value: 'farm subsidies'}, 
-                    { value: 'agriculture'}, 
-                    { value: 'tax reform'},
-                    { value: 'taxes'},
-                    { value: 'universal health care'},
-                    { value: 'Obamacare'}, 
-                    { value: 'freedom dividend'},
-                    { value: 'climate change'}, 
-                    { value: 'immigration reform'}, 
-                    { value: 'immigration'},
-                    { value: 'supreme court'}, 
-                    { value: 'voter fraud'}, 
-                    { value: 'social security'}, 
-                    { value: 'citizenship'}, 
-                    { value: 'dual citizenship'}, 
-                    { value: 'green card'}, 
-                    { value: 'citizenship test'}, 
-                    { value: 'planned parenthood'}, 
-                    { value: 'abortion'}, 
-                    { value: 'religious freedom act'}, 
-                    { value: 'vaccines'}, 
-                    { value: 'privacy rights'}, 
-                    { value: 'surveillance'}, 
-                    { value: 'marriage equality'}, 
-                    { value: 'lives matter'}, 
-                    { value: 'student loan crisis'}, 
-                    { value: 'student loans'}, 
-                    { value: 'in-state tuition'}, 
-                    { value: 'affirmative action'}, 
-                    { value: 'transgender rights'}, 
-                    { value: 'gay rights'}, 
-                    { value: 'animal rights'}, 
-                    { value: 'child support'}, 
-                    { value: 'poverty'}, 
-                    { value: 'opioid crisis'}, 
-                    { value: 'electoral college'}, 
-                    { value: 'free market'}, 
-                    { value: 'free market capitalism'}, 
-                    { value: 'obesity'}, 
-                    { value: 'LGBT adoption rights'}, 
-                    { value: 'gender workplace diversity'}, 
-                    { value: 'gender and sexuality rights'},
-                    { value: 'minimum wage'}, 
-                    { value: 'military service'}, 
-                    { value: 'border wall'}, 
-                    { value: 'border security'}, 
-                    { value: 'alternative energy'}, 
-                    { value: 'trade war'}, 
-                    { value: 'oil drilling'}, 
-                    { value: 'foreign elections' }, 
-                    { value: 'NAFTA'}, 
-                    { value: 'NATO'}, 
-                    { value: 'firearms'}, 
-                    { value: 'civil rights'}, 
-                    { value: 'death penalty'}, 
-                    { value: 'tobacco'}, 
-                    { value: 'terrorism'}, 
-                    { value: 'ISIS'}, 
-                    { value: 'corruption'}, 
-                    { value: 'drug policy'}, 
-                    { value: 'drugs'}, 
-                    { value: 'unemployment'}, 
-                    { value: 'economic crisis'}, 
-                    { value: 'coronavirus'}, 
-                    { value: 'quarantine'}, 
-                    { value: 'economy'}, 
-                    { value: 'inauguration'}, 
-                    { value: 'Me Too movement'}, 
-                    { value: 'tech monopolies'}, 
-                    { value: 'net neutrality'},
-                    { value: 'consititution'}, 
-                    { value: 'free speech'}, 
-                    { value: 'homelessness'}, 
-                    { value: 'welfare'}, 
-                    { value: 'racism'}, 
-                    { value: 'drones'}, 
-                ];
-
-                var politicians = politicianlist;
-                //send parse data to autocomplete function
-                loadSuggestions(topics, politicians);
-                
-                }
-            });
-          function loadSuggestions(topics, politicians) {
-            $('#autocomplete-1').autocomplete({
-              lookup: topics,
-              onSelect: function (suggestion) {
-                $('#selected_option').html(suggestion.value);
-              }
-            });
-            $('#autocomplete-2').autocomplete({
-                lookup: politicians, 
-                onSelect: function (suggestion) {
-                    $('#selected_option').html(suggestion.value); 
-                }
-            })
-          }
-          });
-
-        </script>
-
-        <style> 
-        .autocomplete-suggestions { border-radius: 3px; border: 3px solid white; background: rgb(34,42,53); overflow: auto; transition: .4s 0s}
-        .autocomplete-suggestion { font-family: 'roboto'; color:white; padding: 2px 5px; border: 3px solid rgb(34, 42, 53); white-space: nowrap; overflow: hidden; transition: .1s 0s}
-        .autocomplete-suggestion:hover {cursor: pointer; background: rgb(34,42,53); border: 3px solid white; border-radius: 3px}
-        .autocomplete-selected { background: #F0F0F0;}
-        .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
-        .autocomplete-group { padding: 2px 5px; }
-        .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+    let politicianlist = localStorage.getItem('politicianlist').split(",");
+    politicianlist = politicianlist.map(function (p) {
+      return { value: p }
+    });
 
 
+    $(document).ready(function () {
 
-        .highlight { 
-            background-color: yellow;
+
+      var arrayReturn = [];
+      $.ajax({
+
+        success: function (data) {
+
+          var topics = [
+            { value: 'health care' },
+            { value: 'gun violence' },
+            { value: 'gun control' },
+            { value: 'gun rights' },
+            { value: 'Russia' },
+            { value: 'Iran' },
+            { value: 'Mexico' },
+            { value: 'Canada' },
+            { value: 'Afghanistan' },
+            { value: 'Cuba' },
+            { value: 'Middle East' },
+            { value: 'United Kingdom' },
+            { value: 'Israel' },
+            { value: 'China' },
+            { value: 'farm subsidies' },
+            { value: 'agriculture' },
+            { value: 'tax reform' },
+            { value: 'taxes' },
+            { value: 'universal health care' },
+            { value: 'Obamacare' },
+            { value: 'freedom dividend' },
+            { value: 'climate change' },
+            { value: 'immigration reform' },
+            { value: 'immigration' },
+            { value: 'supreme court' },
+            { value: 'voter fraud' },
+            { value: 'social security' },
+            { value: 'citizenship' },
+            { value: 'dual citizenship' },
+            { value: 'green card' },
+            { value: 'citizenship test' },
+            { value: 'planned parenthood' },
+            { value: 'abortion' },
+            { value: 'religious freedom act' },
+            { value: 'vaccines' },
+            { value: 'privacy rights' },
+            { value: 'surveillance' },
+            { value: 'marriage equality' },
+            { value: 'lives matter' },
+            { value: 'student loan crisis' },
+            { value: 'student loans' },
+            { value: 'in-state tuition' },
+            { value: 'affirmative action' },
+            { value: 'transgender rights' },
+            { value: 'gay rights' },
+            { value: 'animal rights' },
+            { value: 'child support' },
+            { value: 'poverty' },
+            { value: 'opioid crisis' },
+            { value: 'electoral college' },
+            { value: 'free market' },
+            { value: 'free market capitalism' },
+            { value: 'obesity' },
+            { value: 'LGBT adoption rights' },
+            { value: 'gender workplace diversity' },
+            { value: 'gender and sexuality rights' },
+            { value: 'minimum wage' },
+            { value: 'military service' },
+            { value: 'border wall' },
+            { value: 'border security' },
+            { value: 'alternative energy' },
+            { value: 'trade war' },
+            { value: 'oil drilling' },
+            { value: 'foreign elections' },
+            { value: 'NAFTA' },
+            { value: 'NATO' },
+            { value: 'firearms' },
+            { value: 'civil rights' },
+            { value: 'death penalty' },
+            { value: 'tobacco' },
+            { value: 'terrorism' },
+            { value: 'ISIS' },
+            { value: 'corruption' },
+            { value: 'drug policy' },
+            { value: 'drugs' },
+            { value: 'unemployment' },
+            { value: 'economic crisis' },
+            { value: 'coronavirus' },
+            { value: 'quarantine' },
+            { value: 'economy' },
+            { value: 'inauguration' },
+            { value: 'Me Too movement' },
+            { value: 'tech monopolies' },
+            { value: 'net neutrality' },
+            { value: 'consititution' },
+            { value: 'free speech' },
+            { value: 'homelessness' },
+            { value: 'welfare' },
+            { value: 'racism' },
+            { value: 'drones' },
+          ];
+
+          var politicians = politicianlist;
+          //send parse data to autocomplete function
+          loadSuggestions(topics, politicians);
+
         }
-
-        .highlightbtn{
-            display: block;
-            margin:auto;
-            color: rgb(34, 42, 53);
-            font-family: 'roboto';
-            font-size: 18px;
-            font-weight: bold;
-            background-color: white;
-            border: 3px solid white;
-            height: 32px;
-            width: 400px;
-            padding: 3px;
-            box-shadow: 3px 3px 0px 1px grey;
-            transition: .5s;
-            transition-delay: 0s;
-        }
-
-        .card-similar {
-              display: none;
+      });
+      function loadSuggestions(topics, politicians) {
+        $('#autocomplete-1').autocomplete({
+          lookup: topics,
+          onSelect: function (suggestion) {
+            $('#selected_option').html(suggestion.value);
           }
+        });
+        $('#autocomplete-2').autocomplete({
+          lookup: politicians,
+          onSelect: function (suggestion) {
+            $('#selected_option').html(suggestion.value);
+          }
+        })
+      }
+    });
 
-        </style>
-      
+  </script>
 
-    </head>
-    <body>
-      <div>
-        <a style = "position: absolute; right: 0; padding-right: 50px; font-size: 22px; font-family: 'Roboto'; font-weight: bold; color: white;  text-decoration: underline;" href = "/v2"> Prototype 2 </a>
-      </div>
-      <div> 
-        <a style = "position: absolute; right: 100; padding-right: 200px; font-size: 22px; font-family: 'Roboto'; font-weight: bold; color: white;  text-decoration: underline;" href = "v1"> Prototype 1 </a>
-      </div> 
-        <div class="topcorner">
-            <div id = "about" > <p onclick="infoOn()" style="color: white; font-size:22px; cursor:pointer; font-family:rockwell; font-size:22px; display:inline"> About </p></div>
-        </div>
-        
-      
-        <div id = "logo">
-            <a href = "/"> <img src="/static/Politician Quotes.png" width="1054" height="608"> </img> </a>
-        </div>
-        <form class="form-inline global-search">
-            
-            
-            <br><br>
-            <div class="form-group ui-widget">
-                <input id="autocomplete-1" type="text" name="topic" class="form-control topic" placeholder="Input Topic" >
-                <input id="autocomplete-2" type="text" name="politicians" class="form-control" placeholder="Input Politicians">
-                <!-- <input style = "max-width: 200px"id ="year" type = "number" name = "year" class = "form-control" placeholder='Year between x and y'>  -->
-                <select id = "party" style = "max-width: 200px; height: 33px">
-                    <option>Select Political Party</option> 
-                    <option value = 'dm'>Democratic</option>
-                    <option value = 'rp'>Republican</option>
-                </select>
+  <style>
+    .autocomplete-suggestions {
+      border-radius: 3px;
+      border: 3px solid white;
+      background: rgb(34, 42, 53);
+      overflow: auto;
+      transition: .4s 0s
+    }
+
+    .autocomplete-suggestion {
+      font-family: 'roboto';
+      color: white;
+      padding: 2px 5px;
+      border: 3px solid rgb(34, 42, 53);
+      white-space: nowrap;
+      overflow: hidden;
+      transition: .1s 0s
+    }
+
+    .autocomplete-suggestion:hover {
+      cursor: pointer;
+      background: rgb(34, 42, 53);
+      border: 3px solid white;
+      border-radius: 3px
+    }
+
+    .autocomplete-selected {
+      background: #F0F0F0;
+    }
+
+    .autocomplete-suggestions strong {
+      font-weight: normal;
+      color: #3399FF;
+    }
+
+    .autocomplete-group {
+      padding: 2px 5px;
+    }
+
+    .autocomplete-group strong {
+      display: block;
+      border-bottom: 1px solid #000;
+    }
+
+
+
+    .highlight {
+      background-color: yellow;
+    }
+
+    .highlightbtn {
+      display: block;
+      margin: auto;
+      color: rgb(34, 42, 53);
+      font-family: 'roboto';
+      font-size: 18px;
+      font-weight: bold;
+      background-color: white;
+      border: 3px solid white;
+      height: 32px;
+      width: 400px;
+      padding: 3px;
+      box-shadow: 3px 3px 0px 1px grey;
+      transition: .5s;
+      transition-delay: 0s;
+    }
+
+    .card-similar {
+      display: none;
+    }
+  </style>
+
+
+</head>
+
+<body>
+  <div>
+    <a style="position: absolute; right: 0; padding-right: 50px; font-size: 22px; font-family: 'Roboto'; font-weight: bold; color: white;  text-decoration: underline;"
+      href="/v2"> Prototype 2 </a>
+  </div>
+  <div>
+    <a style="position: absolute; right: 100; padding-right: 200px; font-size: 22px; font-family: 'Roboto'; font-weight: bold; color: white;  text-decoration: underline;"
+      href="v1"> Prototype 1 </a>
+  </div>
+  <div class="topcorner">
+    <div id="about">
+      <p onclick="infoOn()"
+        style="color: white; font-size:22px; cursor:pointer; font-family:rockwell; font-size:22px; display:inline">
+        About </p>
+    </div>
+  </div>
+
+
+  <div id="logo">
+    <a href="/"> <img src="/static/Politician Quotes.png" width="1054" height="608"> </img> </a>
+  </div>
+  <form class="form-inline global-search">
+
+
+    <br><br>
+    <div class="form-group ui-widget">
+      <input id="autocomplete-1" type="text" name="topic" class="form-control topic" placeholder="Input Topic(s)">
+      <input id="autocomplete-2" type="text" name="politicians" class="form-control" placeholder="Input Politician(s)">
+      <!-- <input style = "max-width: 200px"id ="year" type = "number" name = "year" class = "form-control" placeholder='Year between x and y'>  -->
+      <select id="party" style="max-width: 200px; height: 33px">
+        <option>Select Political Party</option>
+        <option value='any'>Any party</option>
+        <option value='dm'>Democrat</option>
+        <option value='rp'>Republican</option>
+      </select>
+    </div>
+    <button type="submit" class="btn" onfocusin="loaderOn()" onfocusout="loaderOff()" onclick="saveTopic()"> <img
+        src="/static/search.png" width="20" height="20" alt="Go"></img> </button>
+  </form>
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+  </div>
+  <div class="project" id="info">
+    <img class='x' src="/static/x.png" height='25' weight='25' onclick="infoOff()" />
+    <h1>What is Politician Quotes?</h1>
+    <p>Politician Quotes is an app that is designed to help uninformed voters or researchers find out what some
+      politicians have said on pressing topics.</p>
+    <p>This project was designed and implemented by Arzu Mammadova (am2692), Aleah Markovic (adm265), Matthew Prince
+      (mp836), and Zhaopeng Xu (zx273).</p>
+    <p>We made this system for the final project of CS/INFO 4300 at Cornell University, taught by Professor DNM.</p>
+  </div>
+
+  <button class="highlightbtn" id="hl" onclick='highlight()'>Highlight Topics</button>
+
+
+  <form id="title" class="form-inline global-search">
+
+    {% if data %}
+    <h1>{{output_message}}</h1>
+    {% for d in data %}
+    <br>
+    <div class="container my-auto">
+      <div class="col s12">
+        <h2 style="color: white; font-family: rockwell; font-weight:bold" class="header">{{d.speaker}}</h2>
+        <div class="card horizontal">
+          <div class="card-image">
+            <div class="profile"><img style="border-radius: 50%;" src={{d.image}}></div>
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+              <h3> {{d.debate_name}}</h3>
+              <h3>{{d.debate_date}} </h3>
+              <br><br>
+              <p class='speech'>{{d.speech}}</p>
             </div>
-            <button type="submit" class="btn" onfocusin="loaderOn()" onfocusout="loaderOff()" onclick="saveTopic()"> <img src="/static/search.png" width="20" height="20" alt="Go"></img> </button>
-        </form>
-        <div id = "loader-wrapper">
-          <div id = "loader"></div>
-         </div>
-        <div class = "project" id = "info">
-          <img class = 'x' src="/static/x.png" height = '25' weight = '25' onclick = "infoOff()" />
-          <h1>What is Politician Quotes?</h1>
-          <p>Politician Quotes is an app that is designed to help uninformed voters or researchers find out what some politicians have said on pressing topics.</p>
-          <p>This project was designed and implemented by Arzu Mammadova (am2692), Aleah Markovic (adm265), Matthew Prince (mp836), and Zhaopeng Xu (zx273).</p>
-          <p>We made this system for the final project of CS/INFO 4300 at Cornell University, taught by Professor DNM.</p>
+            <div class="card-similar">
+              {% for s in d.sim %}
+              <div class="sim-content">
+                <h4> {{s.speaker}} </h4> <br>
+                <h5> {{s.debate_name}} </h5>
+                <h5> {{s.debate_date}} </h5> <br>
+                <p> {{s.speech}} </p> <br>
+                <a href={{s.link}}>
+                  <h5>Read More</h5>
+                </a>
+              </div>
+              {% endfor %}
+
+            </div>
+            <div class="show">
+              <p>See Similar Quotes</p>
+            </div>
+            <div class="card-action">
+              <a href={{d.link}}>
+                <h3>Read More</h3>
+              </a>
+            </div>
+          </div>
         </div>
 
-        <button class = "highlightbtn" id = "hl" onclick = 'highlight()'>Highlight Topics</button>
-
-        
-        <form id = "title" class="form-inline global-search">
-        
-        {% if data %}
-            <h1>{{output_message}}</h1>
-            {% for d in data %}  
-                <br>      
-                <div class = "container my-auto">
-                <div class="col s12">
-                    <h2 style = "color: white; font-family: rockwell; font-weight:bold" class="header">{{d.speaker}}</h2>
-                    <div class="card horizontal">
-                            <div class="card-image">
-                                <div class="profile"><img style = "border-radius: 50%;" src={{d.image}}></div>
-                            </div>
-                      <div class="card-stacked">
-                        <div class="card-content">
-                            <h3> {{d.debate_name}}</h3>
-                            <h3>{{d.debate_date}} </h3>
-                            <br><br>
-                          <p class = 'speech'>{{d.speech}}</p>
-                        </div>
-                        <div class="card-similar">
-                          {% for s in d.sim %}
-                            <div class = "sim-content">
-                                <h4> {{s.speaker}} </h4> <br>
-                                <h5> {{s.debate_name}} </h5>
-                                <h5> {{s.debate_date}} </h5> <br>
-                                <p> {{s.speech}} </p> <br>
-                                <a href = {{s.link}}><h5>Read More</h5></a>
-                            </div>
-                          {% endfor %}
-
-                        </div>
-                        <div class = "show">
-                            <p>See Similar Quotes</p>
-                        </div>
-                        <div class="card-action">
-                          <a href={{d.link}}><h3>Read More</h3></a>
-                        </div>
-                        </div>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
-            <br>
-            {% endfor %}
-            {% else %}
-            <h1>{{output_message}}</h1>
-        {% endif %}
-        </form>
+      </div>
+    </div>
+    </div>
+    <br>
+    {% endfor %}
+    {% else %}
+    <h1>{{output_message}}</h1>
+    {% endif %}
+  </form>
 
 
 
-        <script>
-        
-          $('.show').click(function() {
-            $(this).siblings().toggle();
-            $(this).html('<p>Go Back</p>')
-            
+  <script>
+
+    $('.show').click(function () {
+      $(this).siblings().toggle();
+      $(this).html('<p>Go Back</p>')
+
+    })
+
+
+
+
+    // function highlightVisible(){
+    //     document.getElementById("hl").style.visibility = visible;
+    // }
+
+    function saveTopic() {
+
+      value = document.getElementById('autocomplete-1').value;
+      localStorage.setItem("topic", value);
+    }
+
+    let flag = true;
+
+    function highlight() {
+
+      const outputs_html = document.getElementsByClassName('speech');
+      let keyWord = localStorage.getItem("topic");
+      const outputs = [...outputs_html];
+
+      if (keyWord.includes(',')) {
+        keyWord = keyWord.split(" ").join("");
+        const keywords = keyWord.split(",");
+        outputs.forEach((item) => {
+          keywords.forEach((keyword) => {
+            const regexRule = new RegExp(keyword, 'gi');
+            const regexRule_undo = new RegExp(`<mark class="highlight">${keyword}</mark>`, 'gi')
+            item.innerHTML = flag ? item.innerHTML.replace(regexRule, `<mark class = "highlight">${keyword}</mark>`) : item.innerHTML.replace(regexRule_undo, keyword);
           })
+        })
+        flag = !flag;
+
+      }
+      else {
+        const regexRule = new RegExp(keyWord, 'gi');
+        const regexRule_undo = new RegExp(`<mark class="highlight">${keyWord}</mark>`, 'gi')
+        outputs.forEach((item) => {
+          item.innerHTML = flag ? item.innerHTML.replace(regexRule, `<mark class = "highlight">${keyWord}</mark>`) : item.innerHTML.replace(regexRule_undo, keyWord);
+
+        })
+
+        flag = !flag;
+
+      }
+    }
 
 
+    function loaderOn() {
+      document.getElementById("loader").style.display = "block";
+    }
+    function loaderOff() {
+      document.getElementById("loader").style.display = "none";
+    }
+    function infoOn() {
+      document.getElementById("info").style.display = "block";
+    }
+    function infoOff() {
+      document.getElementById("info").style.display = "none";
+    }
 
+  </script>
 
-        // function highlightVisible(){
-        //     document.getElementById("hl").style.visibility = visible;
-        // }
-
-        function saveTopic() {
-
-            value = document.getElementById('autocomplete-1').value;
-            localStorage.setItem("topic", value);
-        }
-
-        let flag = true;
-
-        function highlight() {
-
-            const outputs_html = document.getElementsByClassName('speech');
-            let keyWord =localStorage.getItem("topic");
-            const outputs = [...outputs_html];
-
-            if (keyWord.includes(',')) {
-                keyWord = keyWord.split(" ").join(""); 
-                const keywords = keyWord.split(","); 
-                outputs.forEach((item) => {
-                    keywords.forEach((keyword) => {
-                        const regexRule = new RegExp(keyword, 'gi');
-                        const regexRule_undo = new RegExp(`<mark class="highlight">${keyword}</mark>`, 'gi')
-                        item.innerHTML = flag ? item.innerHTML.replace(regexRule, `<mark class = "highlight">${keyword}</mark>`) : item.innerHTML.replace(regexRule_undo, keyword);
-                    })
-                })
-                flag = !flag; 
-    
-            }
-            else {
-                const regexRule = new RegExp(keyWord, 'gi');
-                const regexRule_undo = new RegExp(`<mark class="highlight">${keyWord}</mark>`, 'gi')
-                outputs.forEach((item) => {                    
-                    item.innerHTML = flag ? item.innerHTML.replace(regexRule, `<mark class = "highlight">${keyWord}</mark>`) : item.innerHTML.replace(regexRule_undo, keyWord);
-       
-            })
-
-                flag = !flag; 
-             
-            }}
-      
-        
-        function loaderOn() {
-            document.getElementById("loader").style.display = "block";
-          }
-        function loaderOff() {
-            document.getElementById("loader").style.display = "none";
-          }
-        function infoOn() {
-            document.getElementById("info").style.display = "block";
-          }
-        function infoOff() {
-            document.getElementById("info").style.display = "none";
-          }
-
-        </script>
-
-    </body>
+</body>
 
 </html>
-

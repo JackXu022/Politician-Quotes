@@ -26,7 +26,7 @@ def search():
 		data = []
 		output_message = ''
 	else:
-		data = get_top_n(topic, 10, politicians)
+		data = get_top_n(topic, 10, politicians, party)
 		for speech in data:
 			text = speech['speech']
 			sim_list = get_3_sim_cosine(text)
