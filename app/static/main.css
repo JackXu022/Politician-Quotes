@@ -92,6 +92,7 @@
 
 
 
+
     .btn {
         color: rgb(34, 42, 53);
         font-family: 'roboto';
@@ -291,6 +292,60 @@
         border: 8px solid white;
         box-shadow: 5px 5px 3px black;
         transition: .6s 0s;
+    }
+
+
+    .show {
+        width: 200px;
+        height: 30px;
+        background-color: lightgrey;
+        text-align: center;
+        margin: auto;
+        border: 3px solid rgb(34, 42, 53);
+        color: rgb(34, 42, 53);
+        transition: .5s 0s;
+        border-radius: 3px;
+        margin-bottom: 15px;
+      }
+
+    .show p {
+        padding: 3px;
+        font-family: 'roboto';
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+    .show:hover {
+        background-color: white;
+        cursor: pointer;
+    }
+
+    .sim-content {
+        margin: auto;
+        padding: 10px;
+        font-family: "roboto";
+    }
+
+    .sim-content a {
+        border: 2px solid rgb(34,42,53);
+        background-color: lightgrey;
+        color: rgb(34,42,53);
+        width: 100px;
+        height: 28px;
+        line-height: 2.0;
+        transition: .3s 0s;
+        margin-top: 8px;
+    }
+
+    .sim-content a h5 {
+        margin: auto;
+        height: 25px;
+        text-align: center;
+        padding: 5px;
+    }
+
+    .sim-content a:hover {
+       background-color: white;
     }
 
     .step-links a{

@@ -6,7 +6,8 @@ import pandas as pd
 
 from app.irsystem.models.search_algorithm_v1 import get_top_n_related
 from app.irsystem.models.search_algorithm_v2 import get_top_n_related_v2
-from app.irsystem.models.cosine_sim import get_top_n
+from app.irsystem.models.search_algorithm_final import get_top_n
+from app.irsystem.models.cosine_sim import get_3_sim_cosine
 from app.data.name_data import names
 
 
@@ -25,7 +26,12 @@ def search():
 		data = []
 		output_message = ''
 	else:
-		data = get_top_n_related_v2(topic, 10, politicians)
+		data = get_top_n(topic, 10, politicians, party)
+		for speech in data:
+			text = speech['speech']
+			sim_list = get_3_sim_cosine(text)
+			speech['sim'] = sim_list
+
 		if data:
 			output_message = "Topics: " + topic + '\n' + "Politicians: " + politicians
 		else: 
