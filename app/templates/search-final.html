@@ -225,6 +225,10 @@
     .card-similar {
       display: none;
     }
+
+    #back {
+      display: none;
+    }
   </style>
 
 
@@ -328,6 +332,7 @@
             </div>
             <div class="show">
               <p>See Similar Quotes</p>
+              <p id = "back">Go Back</p>
             </div>
             <div class="card-action">
               <a href={{d.link}}>
@@ -351,7 +356,7 @@
 
     $('.show').click(function () {
       $(this).siblings().toggle();
-      $(this).html('<p>Go Back</p>')
+      $(this).children().toggle();
 
     })
 
