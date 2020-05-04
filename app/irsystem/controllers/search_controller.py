@@ -21,7 +21,6 @@ def search():
 	topic = request.args.get('topic')
 	politicians = request.args.get('politicians')
 	party = request.args.get('party')
-	print(party)
 	year = request.args.get('year')
 	if not topic and not politicians:
 		data = []
