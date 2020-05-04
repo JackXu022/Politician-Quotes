@@ -33,6 +33,12 @@ def get_top_n(topic, n, politicians, party, year):
         related_data = related_data.loc[related_data.party.isin(["Democratic"])]
     elif party == "rp":
         related_data = related_data.loc[related_data.party.isin(["Republican"])]
+    if year: 
+        new_data = related_data.loc[related_data.debate_year.isin([year])]
+        if (not new_data.empty): 
+            related_data = new_data
+        else: 
+            output_message = 'Sorry, no results were found for ' + year + '. See results from other years below.'
     if topic:        
         input = [topic.strip() for topic in topic.split(",")]
         topics = []
@@ -58,21 +64,24 @@ def get_top_n(topic, n, politicians, party, year):
             if score > 0:
                 trans_info = related_data.loc[index]
                 debate_name = trans_info['debate_name']
+                new_party = trans_info['party']
                 if 'Transcript:' in debate_name: 
-                    debate_name.replace('Transcript:', '')
-                if trans_info['party'] == 'Democratic': 
-                    trans_info['party'] = 'Democrat'
-                obj = {"year": trans_info["debate_year"], "score": score_matrix[index], "debate_name": debate_name, "debate_date": trans_info['debate_date'], "speaker":trans_info['speaker'], "speech":trans_info['speech'], "link": trans_info["transcript_link"], "image":image_search(trans_info['speaker']), "party":trans_info['party']}
+                    debate_name = debate_name.replace('Transcript:', '')
+                if trans_info['party'] == 'Democratic':
+                    new_party = 'Democrat'
+                obj = {"year": trans_info["debate_year"], "score": score_matrix[index], "debate_name": debate_name, "debate_date": trans_info['debate_date'], "speaker":trans_info['speaker'], "speech":trans_info['speech'], "link": trans_info["transcript_link"], "image":image_search(trans_info['speaker']), "party":new_party}
                 final_data.append(obj)
-        if year: 
-            new_data = []
-            for x in final_data: 
-                if year == x["year"]: 
-                    new_data.append(x)
-            if len(new_data) != 0: 
-                final_data = new_data
-            else: 
-                output_message = 'Sorry, no results were found for ' + year + '. See results from other years below.'
+        # if year:
+        #     print('type of input is', type(year)) 
+        #     new_data = []
+        #     for x in final_data: 
+        #         quote_year = str(x['year'])
+        #         if quote_year==year:
+        #             new_data.append(x)
+        #     if len(new_data) != 0:
+        #         final_data = new_data
+        #     else: 
+        #         output_message = 'Sorry, no results were found for ' + year + '. See results from other years below.'
 
         return (final_data, {'message': output_message})
     else:
