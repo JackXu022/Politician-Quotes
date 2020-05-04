@@ -83,7 +83,7 @@
             { value: 'in-state tuition' },
             { value: 'affirmative action' },
             { value: 'transgender rights' },
-            { value: 'gay rights' },
+            { value: 'gay marriage' },
             { value: 'animal rights' },
             { value: 'child support' },
             { value: 'poverty' },
@@ -258,7 +258,7 @@
     <div class="form-group ui-widget">
       <input id="autocomplete-1" type="text" name="topic" class="form-control topic" placeholder="Input Topic(s)">
       <input id="autocomplete-2" type="text" name="politicians" class="form-control" placeholder="Input Politician(s)">
-      <input style = "max-width: 220px"id ="year" type = "number" name = "year" class = "form-control" placeholder='Year between 2016 and 2020'> 
+      <input style = "max-width: 220px"id ="year" type = "number" name = "year" class = "form-control" placeholder='Year between 2002 and 2020'> 
       <select id="party" style="max-width: 200px; height: 33px">
         <option>Select Political Party</option>
         <option value='any'>Any party</option>
@@ -282,13 +282,16 @@
     <p>We made this system for the final project of CS/INFO 4300 at Cornell University, taught by Professor DNM.</p>
   </div>
 
-  <button class="highlightbtn" id="hl" onclick='highlight()'>Highlight Topics</button>
+  <button style = "display:none" class ="highlightbtn" id="hl" onclick='highlight()'>Highlight Topics</button>
 
 
   <form id="title" class="form-inline global-search">
 
     {% if data %}
-    <h1>{{output_message}}</h1>
+    <script style = "display: none">
+      document.getElementById("hl").style.display = 'block';
+    </script>
+    <h1>{{output_message}}</h1></br> 
     <h3 style = "color: red">{{year_message}}</h3>
     <br> 
     <br> 
@@ -364,6 +367,8 @@
 
       value = document.getElementById('autocomplete-1').value;
       localStorage.setItem("topic", value);
+      document.getElementById('hl').style.display = 'none'
+
     }
 
     let flag = true;
@@ -403,9 +408,12 @@
 
     function loaderOn() {
       document.getElementById("loader").style.display = "block";
+
     }
     function loaderOff() {
       document.getElementById("loader").style.display = "none";
+
+
     }
     function infoOn() {
       document.getElementById("info").style.display = "block";
