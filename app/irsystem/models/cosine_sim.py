@@ -103,11 +103,11 @@ def sim_list(doc_id):        #produces 5 most similar docs to doc_id
         result.append(sim_list[i][1])
     return result
 
-def get_5_sim_cosine(str):
+def get_3_sim_cosine(str):
     q = tokenize(str.lower())
     final_data = []
     sim_list = index_search(q, inv_idx, idf, doc_norms)
-    for i in range(0, 5):
+    for i in range(1, 4):
         idx = sim_list[i][1]
         obj = {"score": sim_list[i][0], "debate_name": data['debate_name'][idx], "debate_date": data['debate_date'][idx], "speaker":data['speaker'][idx], "speech":data['speech'][idx], "link": data["transcript_link"][idx] }
         final_data.append(obj)

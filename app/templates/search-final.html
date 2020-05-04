@@ -184,6 +184,10 @@
             transition-delay: 0s;
         }
 
+        .card-similar {
+              display: none;
+          }
+
         </style>
       
 
@@ -211,7 +215,7 @@
                 <input id="autocomplete-1" type="text" name="topic" class="form-control topic" placeholder="Input Topic" >
                 <input id="autocomplete-2" type="text" name="politicians" class="form-control" placeholder="Input Politicians">
                 <!-- <input style = "max-width: 200px"id ="year" type = "number" name = "year" class = "form-control" placeholder='Year between x and y'>  -->
-                <select id = "party" style = "max-width: 200px; height: 35px">
+                <select id = "party" style = "max-width: 200px; height: 33px">
                     <option>Select Political Party</option> 
                     <option value = 'dm'>Democratic</option>
                     <option value = 'rp'>Republican</option>
@@ -253,8 +257,24 @@
                             <br><br>
                           <p class = 'speech'>{{d.speech}}</p>
                         </div>
+                        <div class="card-similar">
+                          {% for s in d.sim %}
+                            <div class = "sim-content">
+                                <h4> {{s.speaker}} </h4> <br>
+                                <h5> {{s.debate_name}} </h5>
+                                <h5> {{s.debate_date}} </h5> <br>
+                                <p> {{s.speech}} </p> <br>
+                                <a href = {{s.link}}><h5>Read More</h5></a>
+                            </div>
+                          {% endfor %}
+
+                        </div>
+                        <div class = "show">
+                            <p>See Similar Quotes</p>
+                        </div>
                         <div class="card-action">
                           <a href={{d.link}}><h3>Read More</h3></a>
+                        </div>
                         </div>
                       </div>
                       
@@ -268,7 +288,18 @@
         {% endif %}
         </form>
 
+
+
         <script>
+        
+          $('.show').click(function() {
+            $(this).siblings().toggle();
+            $(this).html('<p>Go Back</p>')
+            
+          })
+
+
+
 
         // function highlightVisible(){
         //     document.getElementById("hl").style.visibility = visible;
