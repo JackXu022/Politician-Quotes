@@ -129,6 +129,8 @@
             { value: 'welfare' },
             { value: 'racism' },
             { value: 'drones' },
+            { value: 'Medicare'},
+            { value: 'Medicare for All'}
           ];
 
           var politicians = politicianlist;
@@ -328,6 +330,7 @@
               <p class='speech'>{{d.speech}}</p>
             </div>
             <div class="card-similar">
+              
               {% for s in d.sim %}
               <div class="sim-content">
                 <h4> {{s.speaker}} </h4> <br>

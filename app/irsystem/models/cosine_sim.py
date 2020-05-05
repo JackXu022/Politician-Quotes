@@ -36,7 +36,7 @@ def build_inverted_index(msgs):
 
 inv_idx = build_inverted_index(docs)
 
-def compute_idf(inv_idx, n_docs, min_df=5, max_df_ratio=0.9):
+def compute_idf(inv_idx, n_docs, min_df=100, max_df_ratio=0.3):
     result = dict()
     max_df = n_docs * max_df_ratio
     for i in inv_idx:
