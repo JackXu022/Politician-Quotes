@@ -277,7 +277,7 @@
         placeholder='Year between 2008 and 2020'> -->
       <select id="party" name='party' style="max-width: 200px; height: 33px">
         <option value=''>Select Political Party</option>
-        <option value='any'>Any party</option>
+        <option value=''>Any party</option>
         <option value='dm'>Democratic</option>
         <option value='rp'>Republican</option>
       </select>
@@ -310,14 +310,16 @@
       document.getElementById("hl").style.display = 'block';
     </script>
     <h1>{{output_message}}</h1></br>
-    <h3 style="color: red">{{year_message}}</h3>
     <br>
     <br>
     {% for d in data %}
     <br>
     <div class="container my-auto">
       <div class="col s12">
-        <h2 style="color: white; font-family: rockwell; font-weight:bold" class="header">{{d.speaker}}, {{d.party}}</h2>
+        <h2 style="color: white; font-family: rockwell; font-weight:bold" class="header">{{d.speaker}}</h2>
+        {% if d.party %}
+        <h2 style="color: white; font-family: rockwell; font-weight:bold">,{{d.party}}</h2>
+        {% endif %}
         <div class="card horizontal">
           <div class="card-image">
             <div class="profile"><img style="border-radius: 50%;" src={{d.image}}></div>

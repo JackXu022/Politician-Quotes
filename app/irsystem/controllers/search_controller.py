@@ -34,17 +34,29 @@ def search():
 			text = speech['speech']
 			sim_list = get_3_sim_cosine(text)
 			speech['sim'] = sim_list
+			if not isinstance(speech['party'], str):
+				speech['party'] = ''
 		if data:                
 			output_message = "Topics: " + topic + ' \n ' + "Politicians: " + politicians
-		else: 
-			if year and topic and politicians: 
-				output_message = 'Sorry, no quotes by ' + politicians + ' were found on the topic of "' + topic + '" from ' + year + '.'
-			elif not year and topic and politicians: 
-				output_message = 'Sorry, no quotes by ' + politicians + ' were found on the topic of "' + topic + '".'
-			elif year and topic and not politicians: 
-				output_message = 'Sorry, no quotes were found on the topic of "' + topic + '" from ' + year + '.'
-			elif not year and topic:
-				output_message = 'No results found for the topic of "' + topic + '".'
+		else:
+			if party == 'dm': 
+				p = 'Democratic'
+			elif party == 'rp': 
+				p = 'Republican'
+			if politicians: 
+				if year:
+					output_message = 'Sorry, no quotes by ' + politicians + ' were found on the topic of "' + topic + '" from ' + year + '.'
+				else: 
+					output_message = 'Sorry, no quotes by ' + politicians + ' were found on the topic of "' + topic + '".'
+			else: 
+				if year and party:
+					output_message = 'Sorry, no quotes by the members of the ' + p + ' party were found on the topic of "' + topic + '" from ' + year + '.'
+				elif not year and party: 
+					output_message = 'Sorry, no quotes by the members of the ' + p + ' party were found on the topic of "' + topic + '".'
+				elif year and not party: 
+					output_message = 'No results found for the topic of "' + topic + '" from year ' + year + '.'
+				else:
+					output_message = 'No results found for the topic of "' + topic + '".'
 		
 	return render_template('search-final.html', name=project_name, netid=net_id, output_message=output_message, year_message=year_message, topic=topic, data=data, names = names)
 
