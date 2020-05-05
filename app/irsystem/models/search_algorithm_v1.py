@@ -25,7 +25,7 @@ def get_top_n_related(topic, n, politicians={}):
         n=int(n)
     else:
         n=10
-    debate_data = pd.read_csv('app/data/debate_transcripts_v5.csv')
+    debate_data = pd.read_csv('app/data/debate_transcripts_v1.csv')
     final_data = []
     if not politicians and not topic:
         return
