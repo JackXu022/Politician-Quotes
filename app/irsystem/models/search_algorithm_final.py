@@ -36,12 +36,11 @@ def get_top_n(topic, n, politicians, party, year):
         related_data = related_data.loc[related_data.party.isin(["Republican"])]
     if topic:        
         input = [topic.strip() for topic in topic.split(",")]
-        topics = []
-        topics += input
-        for topic in input:
-            words = topic.split(" ")
-            if words[0] not in topics:
-                topics.append(words[0])
+        first = input[0]
+        topics = [first]
+        words = first.split(" ")
+        if words[0] not in topics:
+            topics.append(words[0])
         wc_matrix = np.zeros((len(topics), len(debate_data.index)))
         score_matrix = np.zeros((len(debate_data.index,)))
         for index, row in related_data.iterrows():
@@ -64,6 +63,8 @@ def get_top_n(topic, n, politicians, party, year):
                     debate_name.replace('Transcript:', '')
                 if trans_info['party'] == 'Democratic': 
                     out_party = 'Democrat'
+                elif isinstance((trans_info['party']), float):
+                    out_party = "No party info"
                 else:
                     out_party = trans_info["party"]
                 obj = {"year": trans_info["debate_year"], "score": score_matrix[index], "debate_name": debate_name, "debate_date": trans_info['debate_date'], "speaker":trans_info['speaker'], "speech":trans_info['speech'], "link": trans_info["transcript_link"], "image":image_search(trans_info['speaker']), "party":out_party}

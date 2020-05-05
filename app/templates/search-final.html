@@ -129,8 +129,8 @@
             { value: 'welfare' },
             { value: 'racism' },
             { value: 'drones' },
-            { value: 'Medicare'},
-            { value: 'Medicare for All'}
+            { value: 'Medicare' },
+            { value: 'Medicare for All' }
           ];
 
           var politicians = politicianlist;
@@ -262,21 +262,21 @@
 
     <br><br>
     <div class="form-group ui-widget">
-      <input id="autocomplete-1" type="text" name="topic" class="form-control topic" placeholder="Input Topic(s)" required>
+      <input id="autocomplete-1" type="text" name="topic" class="form-control topic" placeholder="Input Topic" required>
       <input id="autocomplete-2" type="text" name="politicians" class="form-control" placeholder="Input Politician(s)">
-      <select id = 'year' name = 'year' style = 'max-width: 200px; height: 33px'> 
-        <option value = ''> Select a year</option>
+      <select id='year' name='year' style='max-width: 200px; height: 33px'>
+        <option value=''> Select a year</option>
         <option value='2008'>2008</option>
         <option value='2012'>2012</option>
         <option value='2016'>2016</option>
-        <option value = '2017'>2017</option> 
-        <option value = '2019'>2019</option>
-        <option value = '2020'>2020</option>
+        <option value='2017'>2017</option>
+        <option value='2019'>2019</option>
+        <option value='2020'>2020</option>
       </select>
       <!-- <input style="max-width: 220px" id="year" type="number" name="year" min="2008" max="2020" class="form-control"
         placeholder='Year between 2008 and 2020'> -->
       <select id="party" name='party' style="max-width: 200px; height: 33px">
-        <option value =''>Select Political Party</option>
+        <option value=''>Select Political Party</option>
         <option value='any'>Any party</option>
         <option value='dm'>Democratic</option>
         <option value='rp'>Republican</option>
@@ -330,7 +330,7 @@
               <p class='speech'>{{d.speech}}</p>
             </div>
             <div class="card-similar">
-              
+
               {% for s in d.sim %}
               <div class="sim-content">
                 <h4> {{s.speaker}} </h4> <br>
@@ -346,7 +346,7 @@
             </div>
             <div class="show">
               <p>See Similar Quotes</p>
-              <p id = "back">Go Back</p>
+              <p id="back">Go Back</p>
             </div>
             <div class="card-action">
               <a href={{d.link}}>
