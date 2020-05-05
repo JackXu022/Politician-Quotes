@@ -34,6 +34,8 @@ def search():
 			text = speech['speech']
 			sim_list = get_3_sim_cosine(text)
 			speech['sim'] = sim_list
+			if not isinstance(speech['party'], str):
+				speech['party'] = ''
 		if data:                
 			output_message = "Topics: " + topic + ' \n ' + "Politicians: " + politicians
 		else:
