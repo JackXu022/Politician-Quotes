@@ -2,7 +2,7 @@
 For the final prototype, we updated the input our algorithm takes in; namely, we limited the topic amount to one, we gave users the ability to specify the year from which they would like to see quotes, and we allowed users to input whether they would like to see quotes from only Democrats or Republicans. We also updated the algorithm so that it still works when a user only enters a politician’s last name instead of their full name.
 
 This is how our webpage look:
-
+![PQ1](PQ1.png)
 
 This Flask app template is intended to get you started with your project and launch it on Heroku, and assumes no prior experience with web development (but some patience).
 
