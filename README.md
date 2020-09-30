@@ -3,6 +3,7 @@ For the final prototype, we updated the input our algorithm takes in; namely, we
 
 This is how our webpage look:
 ![PQ1](PQ1.png)
+![PQ3](PQ3.png)
 
 This Flask app template is intended to get you started with your project and launch it on Heroku, and assumes no prior experience with web development (but some patience).
 
